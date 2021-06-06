@@ -1,4 +1,5 @@
 import { Component } from "react";
+import Header from './Header'
 
 class AddStudent extends Component {
     render() {
@@ -7,15 +8,15 @@ class AddStudent extends Component {
                 <Header title='Hallgató hozzáadása' buttonTitle='Vissza' buttonLink=''></Header>
                 <div class="form-group">
                     <label for="inputName">Név</label>
-                    <input type="text" class="form-control" id="inputName" placeholder="Név">
+                    <input type="text" class="form-control" id="inputName" placeholder="Név"/>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail">E-mail cím</label>
-                    <input type="email" class="form-control" id="inputEmail" placeholder="E-mail cím">
+                    <input type="email" class="form-control" id="inputEmail" placeholder="E-mail cím"/>
                 </div>
                 <div class="form-group">
                     <label for="inputAge">Életkor</label>
-                    <input type="number" class="form-control" id="inputAge" placeholder="Életkor">
+                    <input type="number" class="form-control" id="inputAge" placeholder="Életkor"/>
                 </div>
                 <div class="form-group">
                     <label class="mr-2" for="inputGender">Nem</label>
