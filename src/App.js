@@ -1,8 +1,10 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+import StudentList from './components/StudentList';
+
 function App() {
   return (
-    <div>
-      <p>Hello</p>
-    </div>
+    <StudentList></StudentList>
   );
 }
 
