@@ -1,10 +1,10 @@
 import { Component } from "react";
-// import { Link, Router, Route } from "react-router-dom";
 // import AddStudent from './AddStudent';
+import { Link } from "react-router-dom";
+
 
 class Header extends Component {
-
-    constructor(props) {
+    constructor() {
         super();
         this.title = '';
         this.buttonTitle = '';
@@ -14,17 +14,14 @@ class Header extends Component {
     render() {
         return (
             <div className="row mt-5 mb-2 ml-1">
-                <h1>{this.props.buttonTitle}</h1>
+                <h1>{this.props.title}</h1>
                 <div className="col">
                 <div className="float-right">
-                    {/* <Router>
-                        <Route path='/add-student' component={AddStudent}></Route>
-                        <Link to={'/AddStudent'}>
-                        </Link>   
-                    </Router>     */}
+                <Link to={this.props.buttonLink}>
                     <button type="button" className="btn btn-success my-2 my-sm-0">
                         {this.props.buttonTitle}
-                    </button> 
+                    </button>
+                </Link>
                 </div>
                 </div>
             </div>

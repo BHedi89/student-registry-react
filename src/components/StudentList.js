@@ -6,7 +6,7 @@ class StudentList extends Component {
     render() {
         return (
             <div className='container'>
-                <Header title='Hallgatói nyilvántartás' buttonTitle='Hozzáadás' buttonLink=''></Header>
+                <Header title='Hallgatói nyilvántartás' buttonTitle='Hozzáadás' buttonLink='/addStudent' />
                 <table className="table table-bordered table-striped">
                     <thead>
                     <tr>
@@ -15,10 +15,10 @@ class StudentList extends Component {
                         <th scope="col">Életkor</th>
                         <th scope="col">Nem</th>
                         {/* <th scope="col">Könyvek száma</th> */}
-                        <th scope="col"></th>
+                        <th scope="col" />
                     </tr>
                     </thead>
-                    <StudentRow></StudentRow>
+                    <StudentRow />
                     {/* <tr app-student-row *ngFor="let s of students | filterStudents: filter" [student]="s"></tr> */}
                 </table>
             </div>

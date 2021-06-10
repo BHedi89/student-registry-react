@@ -2,7 +2,6 @@ import { Component } from "react";
 
 class StudentRow extends Component {
 
-
     render() {
         return (
             <tbody>
