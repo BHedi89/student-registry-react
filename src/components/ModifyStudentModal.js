@@ -56,6 +56,7 @@ class ModifyStudentModal extends Component {
                 placeholder="Név"
                 required
                 onChange={this.inputChangeHandler}
+                defaultValue={this.props.students.name}
               />
               <Form.Control.Feedback type="invalid">
                 Név megadása kötelező
@@ -68,6 +69,7 @@ class ModifyStudentModal extends Component {
                 placeholder="E-mail cím"
                 required
                 onChange={this.inputChangeHandler}
+                defaultValue={this.props.students.email}
               />
               <Form.Control.Feedback type="invalid">
                 E-mail cím megadása kötelező
@@ -80,6 +82,7 @@ class ModifyStudentModal extends Component {
                 placeholder="Életkor"
                 required
                 onChange={this.inputChangeHandler}
+                defaultValue={this.props.students.age}
               />
               <Form.Control.Feedback type="invalid">
                 Életkor megadása kötelező
@@ -92,6 +95,7 @@ class ModifyStudentModal extends Component {
                 as="select"
                 className="custom-select my-1 mr-sm-2"
                 onChange={this.inputChangeHandler}
+                defaultValue={this.props.students.gender}
               >
                 <option value="">Válassz...</option>
                 <option value="FEMALE">Nő</option>
