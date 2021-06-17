@@ -21,19 +21,43 @@ class StudentRow extends Component {
       });
   }
 
-  modalOpen = () => {
-    this.setState({ modal: true });
+  handleClose = () => {
+    this.setState({
+      show: false,
+    });
+  };
+
+  handleShow = () => {
+    this.setState({
+      show: true,
+    });
   };
 
   render() {
     const { students } = this.state;
     return (
       <Fragment>
-        <Modal show={this.state.modal}>
+        <Modal show={this.state.show} onHide={this.handleClose}>
           <ModifyStudentModal />
+          <Modal.Footer>
+            <button
+              type="button"
+              className="btn btn-outline-dark"
+              onClick={this.handleClose}
+            >
+              Mégsem
+            </button>
+            <button
+              className="btn btn-primary"
+              type="submit"
+              onClick={this.handleClose}
+            >
+              Mentés
+            </button>
+          </Modal.Footer>
         </Modal>
         <tbody>
-          {students.map(student => {
+          {students.map((student) => {
             return (
               <tr key={student.id}>
                 <td>{student.name}</td>
@@ -44,7 +68,7 @@ class StudentRow extends Component {
                   <button
                     type="button"
                     className="btn btn-warning btn-sm mr-2"
-                    onClick={this.modalOpen}
+                    onClick={this.handleShow}
                   >
                     Módosítás
                   </button>
@@ -53,8 +77,8 @@ class StudentRow extends Component {
                   </button>
                 </td>
               </tr>
-            )
-            })}
+            );
+          })}
         </tbody>
       </Fragment>
     );
