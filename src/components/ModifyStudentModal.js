@@ -1,19 +1,41 @@
 import React from "react";
 import { Component } from "react";
-import { Modal } from "react-bootstrap";
+import { Modal, Form, Button } from "react-bootstrap";
+import classes from "./ModifyStudentModal.module.css";
 
 class ModifyStudentModal extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       show: false,
+      validated: false
     };
   }
 
   handleClose = () => {
     this.setState({
-      show: false,
+      show: false
     });
+  };
+
+  handleSubmit = (e) => {
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    this.setState({
+      validated: true
+    });
+  };
+
+  inputChangeHandler = (e) => {
+    if (e.target.value.trim().length > 0) {
+      this.setState({
+        validated: true
+      });
+    }
   };
 
   render() {
@@ -23,74 +45,68 @@ class ModifyStudentModal extends Component {
           <Modal.Title>Adatok módosítása</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form>
-            <div className="form-group">
-              <label htmlFor="inputName">Név</label>
-              <input
+          <Form
+            noValidate
+            validated={this.state.validated}
+            onSubmit={this.handleSubmit}
+          >
+            <Form.Group controlId="validationName">
+              <Form.Label>Név</Form.Label>
+              <Form.Control
                 type="text"
-                className="form-control"
-                name="name"
                 placeholder="Név"
-                // formControlName="name"
+                required
+                onChange={this.inputChangeHandler}
               />
-              {/* <div class="invalid-feedback" *ngIf="form.controls.name.errors?.required">
-              Név megadása kötelező
-          </div> */}
-            </div>
-            <div className="form-group">
-              <label htmlFor="inputEmail">E-mail cím</label>
-              <input
+              <Form.Control.Feedback type="invalid">
+                Név megadása kötelező
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group controlId="validationEmail">
+              <Form.Label>E-mail cím</Form.Label>
+              <Form.Control
                 type="email"
-                className="form-control"
-                name="email"
                 placeholder="E-mail cím"
-                //   formControlName="email"
+                required
+                onChange={this.inputChangeHandler}
               />
-              {/* <div class="invalid-feedback" *ngIf="form.controls.email.errors?.required">
-              E-mail cím megadása kötelező
-          </div> */}
-              {/* <div class="invalid-feedback" *ngIf="form.controls.email.errors?.email">
-              Nem valós e-mail cím
-          </div> */}
-            </div>
-            <div className="form-group">
-              <label htmlFor="inputAge">Életkor</label>
-              <input
+              <Form.Control.Feedback type="invalid">
+                E-mail cím megadása kötelező
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group controlId="validationAge">
+              <Form.Label>Életkor</Form.Label>
+              <Form.Control
                 type="number"
-                className="form-control"
-                name="age"
                 placeholder="Életkor"
-                //   formControlName="age"
+                required
+                onChange={this.inputChangeHandler}
               />
-              {/* <div class="invalid-feedback" *ngIf="form.controls.age.errors?.required">
-              Életkor megadása kötelező
-          </div>
-          <div class="invalid-feedback" *ngIf="form.controls.age.errors?.min">
-              Legalább 18-nak kell lennie
-          </div>
-          <div class="invalid-feedback" *ngIf="form.controls.age.errors?.max">
-              Legfeljebb 100-nak szabad lennie
-          </div> */}
-            </div>
-            <div className="form-group">
-              <label className="mr-2" htmlFor="inputGender">
-                Nem
-              </label>
-              <select
+              <Form.Control.Feedback type="invalid">
+                Életkor megadása kötelező
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group controlId="validationGender">
+              <Form.Label className="mr-2">Nem</Form.Label>
+              <Form.Control
+                as="select"
                 className="custom-select my-1 mr-sm-2"
-                name="gender"
-                //   formControlName="gender"
+                required
+                onChange={this.inputChangeHandler}
               >
                 <option value="FEMALE">Nő</option>
                 <option value="MALE">Férfi</option>
                 <option value="2">Egyéb</option>
                 <option value="3">Nem szeretném megadni</option>
-              </select>
-              {/* <div class="invalid-feedback" *ngIf="form.controls.gender.errors?.binary">
-              Kötelező: Férfi vagy Nő
-          </div> */}
-            </div>
-          </form>
+              </Form.Control>
+              <Form.Control.Feedback type="invalid">
+                Nem megadása kötelező
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Button className="btn btn-primary" type="submit">
+              Mentés
+            </Button>
+          </Form>
         </Modal.Body>
       </>
     );

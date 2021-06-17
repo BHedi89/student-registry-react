@@ -38,23 +38,7 @@ class StudentRow extends Component {
     return (
       <Fragment>
         <Modal show={this.state.show} onHide={this.handleClose}>
-          <ModifyStudentModal />
-          <Modal.Footer>
-            <button
-              type="button"
-              className="btn btn-outline-dark"
-              onClick={this.handleClose}
-            >
-              Mégsem
-            </button>
-            <button
-              className="btn btn-primary"
-              type="submit"
-              onClick={this.handleClose}
-            >
-              Mentés
-            </button>
-          </Modal.Footer>
+          <ModifyStudentModal students={this.state.students}/>
         </Modal>
         <tbody>
           {students.map((student) => {
