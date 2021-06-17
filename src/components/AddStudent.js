@@ -7,19 +7,19 @@ class AddStudent extends Component {
             <div className='container'>
                 <Header title='Új hallgató hozzáadása' buttonTitle='Vissza' buttonLink='/studentList' />
                 <div className="form-group">
-                    <label for="inputName">Név</label>
+                    <label htmlFor="inputName">Név</label>
                     <input type="text" className="form-control" id="inputName" placeholder="Név"/>
                 </div>
                 <div className="form-group">
-                    <label for="inputEmail">E-mail cím</label>
+                    <label htmlFor="inputEmail">E-mail cím</label>
                     <input type="email" className="form-control" id="inputEmail" placeholder="E-mail cím"/>
                 </div>
                 <div className="form-group">
-                    <label for="inputAge">Életkor</label>
+                    <label htmlFor="inputAge">Életkor</label>
                     <input type="number" className="form-control" id="inputAge" placeholder="Életkor"/>
                 </div>
                 <div className="form-group">
-                    <label className="mr-2" for="inputGender">Nem</label>
+                    <label className="mr-2" htmlFor="inputGender">Nem</label>
                     <select className="custom-select my-1 mr-sm-2" id="inputGender">
                         <option value="FEMALE">Nő</option>
                         <option value="MALE">Férfi</option>

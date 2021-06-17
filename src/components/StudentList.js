@@ -19,7 +19,6 @@ class StudentList extends Component {
                     </tr>
                     </thead>
                     <StudentRow />
-                    {/* <tr app-student-row *ngFor="let s of students | filterStudents: filter" [student]="s"></tr> */}
                 </table>
             </div>
         )
