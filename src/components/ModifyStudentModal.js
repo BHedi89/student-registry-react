@@ -18,12 +18,12 @@ class ModifyStudentModal extends Component {
   };
 
   handleSubmit = (e) => {
+    e.preventDefault();
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       e.preventDefault();
       e.stopPropagation();
     }
-
     this.setState({
       validated: true
     });
