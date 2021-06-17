@@ -1,7 +1,6 @@
 import React from "react";
 import { Component } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
-import classes from "./ModifyStudentModal.module.css";
 
 class ModifyStudentModal extends Component {
   constructor(props) {
@@ -89,11 +88,12 @@ class ModifyStudentModal extends Component {
             <Form.Group controlId="validationGender">
               <Form.Label className="mr-2">Nem</Form.Label>
               <Form.Control
+                required
                 as="select"
                 className="custom-select my-1 mr-sm-2"
-                required
                 onChange={this.inputChangeHandler}
               >
+                <option value="">Válassz...</option>
                 <option value="FEMALE">Nő</option>
                 <option value="MALE">Férfi</option>
                 <option value="2">Egyéb</option>
