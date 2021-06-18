@@ -15,7 +15,8 @@ class ModifyStudentModal extends Component {
     };
   }
 
-  update(studentId) {
+  update() {
+    const studentId = this.props.students.id;
     fetch(`https://progmatic.hu/frontend/students?id=${studentId}`, {
       method: "PUT",
       headers: {
@@ -30,8 +31,7 @@ class ModifyStudentModal extends Component {
         }
       })
     })
-    .then(resp => resp.json())
-    .then(result => console.log(result));
+    .then(resp => resp.json());
   }
 
   handleClose = () => {
@@ -50,18 +50,14 @@ class ModifyStudentModal extends Component {
     this.setState({
       validated: true,
     });
-    console.log(this.state);
-    this.update(this.props.students.id);
+    this.update();
+
+    console.log(this.props.students.id);
+    console.log(this.props.students);
     // this.handleClose();
   };
 
   inputChangeHandler(changeObject) {
-    // if (e.target.value.trim().length > 0) {
-    //   this.setState({
-    //     validated: true,
-    //   });
-      
-    // }
     this.setState(changeObject);
   };
 
