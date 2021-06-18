@@ -54,7 +54,12 @@ class StudentRow extends Component {
                     show={this.state.show && this.state.modal === student.id}
                     onHide={this.handleClose}
                   >
-                    <ModifyStudentModal students={student} />
+                    <Modal.Header closeButton>
+                      <Modal.Title>Adatok módosítása</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <ModifyStudentModal students={student} />
+                    </Modal.Body>
                   </Modal>
                   <button
                     type="button"
