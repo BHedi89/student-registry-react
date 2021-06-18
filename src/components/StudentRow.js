@@ -58,7 +58,7 @@ class StudentRow extends Component {
                       <Modal.Title>Adatok módosítása</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                      <ModifyStudentModal students={student} />
+                      <ModifyStudentModal students={student} closeModal={this.handleClose}/>
                     </Modal.Body>
                   </Modal>
                   <button

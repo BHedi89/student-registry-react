@@ -6,7 +6,6 @@ class ModifyStudentModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: true,
       validated: false,
       name: this.props.students.name,
       email: this.props.students.email,
@@ -34,14 +33,8 @@ class ModifyStudentModal extends Component {
     .then(resp => resp.json());
   }
 
-  handleClose = () => {
-    this.setState({
-      show: false,
-    });
-  };
-
   handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       e.preventDefault();
@@ -54,7 +47,8 @@ class ModifyStudentModal extends Component {
 
     console.log(this.props.students.id);
     console.log(this.props.students);
-    // this.handleClose();
+
+    this.props.closeModal();
   };
 
   inputChangeHandler(changeObject) {
@@ -63,10 +57,10 @@ class ModifyStudentModal extends Component {
 
   render() {
     return (
+      <>
       <Form
         noValidate
         validated={this.state.validated}
-        onSubmit={this.handleSubmit}
       >
         <Form.Group controlId="validationName">
           <Form.Label>Név</Form.Label>
@@ -126,10 +120,11 @@ class ModifyStudentModal extends Component {
             Nem megadása kötelező
           </Form.Control.Feedback>
         </Form.Group>
-        <Button className="btn btn-primary" type="submit" block>
-          Mentés
-        </Button>
       </Form>
+      <Button className="btn btn-primary" onClick={this.handleSubmit} type="button" block>
+        Mentés
+      </Button>
+    </>
     );
   }
 }
