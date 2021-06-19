@@ -18,7 +18,7 @@ class ModifyStudentModal extends Component {
     const studentId = this.props.students.id - 1;
     const FIREBASE_DOMAIN = 'https://students-administration-67d7b-default-rtdb.europe-west1.firebasedatabase.app';
     fetch(`${FIREBASE_DOMAIN}/students/students/${studentId}.json`, {
-      method: "PUT",
+      method: "PATCH",
       headers: {
         'Content-Type': 'application/json'
       },
