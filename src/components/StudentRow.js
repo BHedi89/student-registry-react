@@ -1,26 +1,42 @@
 import React, { Component, Fragment } from "react";
 import ModifyStudentModal from "./ModifyStudentModal";
 import { Modal } from "react-bootstrap";
+import DeleteStudentModal from "./DeleteStudentModal";
 
 class StudentRow extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: false,
-      modal: "",
+      showModify: false,
+      showDelete: false,
+      modifyModal: "",
+      deleteModal: ""
     };
   }
 
-  handleClose = () => {
+  handleCloseModify = () => {
     this.setState({
-      show: false,
+      showModify: false,
     });
   };
 
-  handleShow(id) {
+  handleShowModify(id) {
     this.setState({
-      show: true,
-      modal: id,
+      showModify: true,
+      modifyModal: id,
+    });
+  }
+
+  handleCloseDelete = () => {
+    this.setState({
+      showDelete: false,
+    });
+  };
+
+  handleShowDelete(id) {
+    this.setState({
+      showDelete: true,
+      deleteModal: id,
     });
   }
 
@@ -38,8 +54,8 @@ class StudentRow extends Component {
               <td>
                 <Modal
                   animation={false}
-                  show={this.state.show && this.state.modal === student.id}
-                  onHide={this.handleClose}
+                  show={this.state.showModify && this.state.modifyModal === student.id}
+                  onHide={this.handleCloseModify}
                 >
                   <Modal.Header closeButton>
                     <Modal.Title>Adatok módosítása</Modal.Title>
@@ -47,18 +63,31 @@ class StudentRow extends Component {
                   <Modal.Body>
                     <ModifyStudentModal
                       students={student}
-                      closeModal={this.handleClose}
+                      closeModal={this.handleCloseModify}
                     />
                   </Modal.Body>
                 </Modal>
                 <button
                   type="button"
                   className="btn btn-warning btn-sm mr-2"
-                  onClick={() => this.handleShow(student.id)}
+                  onClick={() => this.handleShowModify(student.id)}
                 >
                   Módosítás
                 </button>
-                <button type="button" className="btn btn-danger btn-sm">
+                <Modal
+                  animation={false}
+                  show={this.state.showDelete && this.state.deleteModal === student.id}
+                >
+                  <DeleteStudentModal
+                    students={student}
+                    closeModal={this.handleCloseDelete}
+                  />
+                </Modal>
+                <button
+                  type="button"
+                  className="btn btn-danger btn-sm"
+                  onClick={() => this.handleShowDelete(student.id)}
+                >
                   Törlés
                 </button>
               </td>
