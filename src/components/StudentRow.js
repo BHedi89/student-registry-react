@@ -14,7 +14,8 @@ class StudentRow extends Component {
 
   //todo later move it to the StudentList component
   componentDidMount() {
-    fetch("https://progmatic.hu/frontend/students")
+    const FIREBASE_DOMAIN = 'https://students-administration-67d7b-default-rtdb.europe-west1.firebasedatabase.app';
+    fetch(`${FIREBASE_DOMAIN}/students.json`)
       .then((resp) => resp.json())
       .then((result) => {
         this.setState({

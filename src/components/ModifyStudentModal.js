@@ -15,40 +15,32 @@ class ModifyStudentModal extends Component {
   }
 
   update() {
-    const studentId = this.props.students.id;
-    fetch(`https://progmatic.hu/frontend/students?id=${studentId}`, {
+    const studentId = this.props.students.id - 1;
+    const FIREBASE_DOMAIN = 'https://students-administration-67d7b-default-rtdb.europe-west1.firebasedatabase.app';
+    fetch(`${FIREBASE_DOMAIN}/students/students/${studentId}.json`, {
       method: "PUT",
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        student: {
-          name: this.state.name,
-          email: this.state.email,
-          age: this.state.age,
-          gender: this.state.gender
-        }
+        name: this.state.name,
+        email: this.state.email,
+        age: this.state.age,
+        gender: this.state.gender
       })
     })
     .then(resp => resp.json());
   }
 
   handleSubmit = (e) => {
-    // e.preventDefault();
     const form = e.currentTarget;
-    if (form.checkValidity() === false) {
-      e.preventDefault();
-      e.stopPropagation();
+    if (form.checkValidity() === true) {
+      this.setState({
+        validated: true,
+      });
+      this.update();
+      this.props.closeModal();
     }
-    this.setState({
-      validated: true,
-    });
-    this.update();
-
-    console.log(this.props.students.id);
-    console.log(this.props.students);
-
-    this.props.closeModal();
   };
 
   inputChangeHandler(changeObject) {
