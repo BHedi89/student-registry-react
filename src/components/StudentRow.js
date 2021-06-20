@@ -41,7 +41,6 @@ class StudentRow extends Component {
   }
 
   render() {
-    const { students } = this.state;
     return (
       <Fragment>
         {
