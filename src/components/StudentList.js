@@ -18,9 +18,10 @@ class StudentList extends Component {
       .then((resp) => resp.json())
       .then((result) => {
         this.setState({
-          students: result.students,
-        });
+          students: result.students.filter( (e) =>  e != null)
+        })
       });
+      // console.log(this.state.students)
   }
 
   render() {
