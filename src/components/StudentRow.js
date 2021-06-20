@@ -43,8 +43,7 @@ class StudentRow extends Component {
   render() {
     return (
       <Fragment>
-        {
-        this.props.students.map((student) => {
+        { this.props.students.map((student) => {
           return (
             <tr key={student.id}>
               <td>{student.name}</td>

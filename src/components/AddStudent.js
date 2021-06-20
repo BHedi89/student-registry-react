@@ -17,7 +17,7 @@ class AddStudent extends Component {
   addNewStudent = () => {
     const FIREBASE_DOMAIN =
         "https://students-administration-67d7b-default-rtdb.europe-west1.firebasedatabase.app";
-    fetch(`${FIREBASE_DOMAIN}/students/students.json`, {
+    fetch(`${FIREBASE_DOMAIN}/students.json`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -39,6 +39,12 @@ class AddStudent extends Component {
         validated: true,
       });
       this.addNewStudent();
+      this.setState({
+        name: "",
+        email: "",
+        age: null,
+        gender: ""
+      })
     }
   };
 

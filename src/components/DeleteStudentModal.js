@@ -14,8 +14,8 @@ class DeleteStudentModal extends Component {
   deleteStudent = () => {
     const FIREBASE_DOMAIN =
     "https://students-administration-67d7b-default-rtdb.europe-west1.firebasedatabase.app";
-    const studentId = this.props.students.id - 1;
-      fetch(`${FIREBASE_DOMAIN}/students/students/${studentId}.json`, {
+    const studentId = this.props.students.id;
+      fetch(`${FIREBASE_DOMAIN}/students/${studentId}.json`, {
           method: "DELETE"
       })
       .then(resp => resp.json());
