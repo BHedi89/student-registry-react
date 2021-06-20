@@ -7,11 +7,29 @@ class AddStudent extends Component {
     super(props);
     this.state = {
       validated: false,
+      name: "",
+      email: "",
+      age: null,
+      gender: ""
     };
   }
 
   addNewStudent = () => {
-      
+    const FIREBASE_DOMAIN =
+        "https://students-administration-67d7b-default-rtdb.europe-west1.firebasedatabase.app";
+    fetch(`${FIREBASE_DOMAIN}/students/students.json`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            name: this.state.name,
+            email: this.state.email,
+            age: parseInt(this.state.age),
+            gender: this.state.gender
+        })
+    })
+    .then(resp => resp.json());
   }
 
   handleSubmit = (e) => {
@@ -20,6 +38,7 @@ class AddStudent extends Component {
       this.setState({
         validated: true,
       });
+      this.addNewStudent();
     }
   };
 
@@ -91,8 +110,8 @@ class AddStudent extends Component {
               <option value="">Válassz...</option>
               <option value="FEMALE">Nő</option>
               <option value="MALE">Férfi</option>
-              <option value="2">Egyéb</option>
-              <option value="3">Nem szeretném megadni</option>
+              <option value="Egyéb">Egyéb</option>
+              <option value="Nem szeretném megadni">Nem szeretném megadni</option>
             </Form.Control>
             <Form.Control.Feedback type="invalid">
               Nem megadása kötelező

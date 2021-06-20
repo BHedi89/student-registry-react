@@ -105,8 +105,8 @@ class ModifyStudentModal extends Component {
             <option value="">Válassz...</option>
             <option value="FEMALE">Nő</option>
             <option value="MALE">Férfi</option>
-            <option value="2">Egyéb</option>
-            <option value="3">Nem szeretném megadni</option>
+            <option value="Egyéb">Egyéb</option>
+            <option value="Nem szeretném megadni">Nem szeretném megadni</option>
           </Form.Control>
           <Form.Control.Feedback type="invalid">
             Nem megadása kötelező

@@ -21,6 +21,7 @@ class StudentList extends Component {
           students: result.students.filter( (e) =>  e != null)
         })
       });
+      // console.log(this.state.students)
   }
 
   render() {
