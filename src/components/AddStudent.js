@@ -11,7 +11,7 @@ class AddStudent extends Component {
       email: "",
       age: null,
       gender: "",
-      showAlert: false,
+      showAlert: false
     };
   }
 
@@ -37,12 +37,16 @@ class AddStudent extends Component {
     if (form.checkValidity()) {
       this.setState({
           validated: true,
-          showAlert: true
+          showAlert: true,
         },
         () => {
           window.setTimeout(() => {
             this.setState({
               showAlert: false,
+              name: "",
+              email: "",
+              age: "",
+              gender: ""
             });
           }, 2000);
         }
@@ -65,7 +69,7 @@ class AddStudent extends Component {
           buttonLink="/studentList"
         />
         <Alert show={this.state.showAlert} variant="success">
-          XY tanuló sikeresen létrehozva
+          {this.state.name} tanuló sikeresen létrehozva
         </Alert>
         <Form noValidate validated={this.state.validated}>
           <Form.Group controlId="validationName">
@@ -77,6 +81,7 @@ class AddStudent extends Component {
               onChange={(e) => {
                 this.inputChangeHandler({ name: e.target.value });
               }}
+              value={this.state.name}
             />
             <Form.Control.Feedback type="invalid">
               Név megadása kötelező
@@ -91,6 +96,7 @@ class AddStudent extends Component {
               onChange={(e) => {
                 this.inputChangeHandler({ email: e.target.value });
               }}
+              value={this.state.email}
             />
             <Form.Control.Feedback type="invalid">
               E-mail cím megadása kötelező
@@ -105,6 +111,7 @@ class AddStudent extends Component {
               onChange={(e) => {
                 this.inputChangeHandler({ age: e.target.value });
               }}
+              value={this.state.age}
             />
             <Form.Control.Feedback type="invalid">
               Életkor megadása kötelező
@@ -119,6 +126,7 @@ class AddStudent extends Component {
               onChange={(e) => {
                 this.inputChangeHandler({ gender: e.target.value });
               }}
+              value={this.state.gender}
             >
               <option value="">Válassz...</option>
               <option value="FEMALE">Nő</option>
