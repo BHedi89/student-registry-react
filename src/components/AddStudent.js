@@ -1,6 +1,6 @@
 import { Component } from "react";
 import Header from "./Header";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
 
 class AddStudent extends Component {
   constructor(props) {
@@ -10,42 +10,46 @@ class AddStudent extends Component {
       name: "",
       email: "",
       age: null,
-      gender: ""
+      gender: "",
+      showAlert: false,
     };
   }
 
   addNewStudent = () => {
     const FIREBASE_DOMAIN =
-        "https://students-administration-67d7b-default-rtdb.europe-west1.firebasedatabase.app";
+      "https://students-administration-67d7b-default-rtdb.europe-west1.firebasedatabase.app";
     fetch(`${FIREBASE_DOMAIN}/students.json`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            name: this.state.name,
-            email: this.state.email,
-            age: parseInt(this.state.age),
-            gender: this.state.gender
-        })
-    })
-    .then(resp => resp.json());
-  }
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: this.state.name,
+        email: this.state.email,
+        age: parseInt(this.state.age),
+        gender: this.state.gender,
+      }),
+    }).then((resp) => resp.json());
+  };
 
   handleSubmit = (e) => {
     const form = e.currentTarget;
-    if (form.checkValidity() === true) {
+    if (form.checkValidity()) {
       this.setState({
-        validated: true,
-      });
+          validated: true,
+          showAlert: true
+        },
+        () => {
+          window.setTimeout(() => {
+            this.setState({
+              showAlert: false,
+            });
+          }, 2000);
+        }
+      );
       this.addNewStudent();
-      this.setState({
-        name: "",
-        email: "",
-        age: null,
-        gender: ""
-      })
     }
+    console.log(form.checkValidity());
   };
 
   inputChangeHandler(changeObject) {
@@ -60,6 +64,9 @@ class AddStudent extends Component {
           buttonTitle="Vissza"
           buttonLink="/studentList"
         />
+        <Alert show={this.state.showAlert} variant="success">
+          XY tanuló sikeresen létrehozva
+        </Alert>
         <Form noValidate validated={this.state.validated}>
           <Form.Group controlId="validationName">
             <Form.Label>Név</Form.Label>
@@ -117,7 +124,9 @@ class AddStudent extends Component {
               <option value="FEMALE">Nő</option>
               <option value="MALE">Férfi</option>
               <option value="Egyéb">Egyéb</option>
-              <option value="Nem szeretném megadni">Nem szeretném megadni</option>
+              <option value="Nem szeretném megadni">
+                Nem szeretném megadni
+              </option>
             </Form.Control>
             <Form.Control.Feedback type="invalid">
               Nem megadása kötelező
