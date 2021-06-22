@@ -11,7 +11,7 @@ class AddStudent extends Component {
       email: "",
       age: null,
       gender: "",
-      showAlert: false
+      showAlert: false,
     };
   }
 
@@ -34,26 +34,28 @@ class AddStudent extends Component {
 
   handleSubmit = (e) => {
     const form = e.currentTarget;
-    if (form.checkValidity()) {
-      this.setState({
-          validated: true,
-          showAlert: true,
-        },
-        () => {
-          window.setTimeout(() => {
-            this.setState({
-              showAlert: false,
-              name: "",
-              email: "",
-              age: "",
-              gender: ""
-            });
-          }, 2000);
-        }
-      );
-      this.addNewStudent();
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    } else {
+        this.setState({
+            validated: true,
+            showAlert: true,
+          },
+          () => {
+            window.setTimeout(() => {
+              this.setState({
+                showAlert: false,
+                name: "",
+                email: "",
+                age: "",
+                gender: "",
+              });
+            }, 2000);
+          }
+        );
+        this.addNewStudent();
     }
-    console.log(form.checkValidity());
   };
 
   inputChangeHandler(changeObject) {
@@ -81,7 +83,6 @@ class AddStudent extends Component {
               onChange={(e) => {
                 this.inputChangeHandler({ name: e.target.value });
               }}
-              value={this.state.name}
             />
             <Form.Control.Feedback type="invalid">
               Név megadása kötelező
@@ -96,7 +97,6 @@ class AddStudent extends Component {
               onChange={(e) => {
                 this.inputChangeHandler({ email: e.target.value });
               }}
-              value={this.state.email}
             />
             <Form.Control.Feedback type="invalid">
               E-mail cím megadása kötelező
@@ -111,7 +111,6 @@ class AddStudent extends Component {
               onChange={(e) => {
                 this.inputChangeHandler({ age: e.target.value });
               }}
-              value={this.state.age}
             />
             <Form.Control.Feedback type="invalid">
               Életkor megadása kötelező
@@ -126,7 +125,6 @@ class AddStudent extends Component {
               onChange={(e) => {
                 this.inputChangeHandler({ gender: e.target.value });
               }}
-              value={this.state.gender}
             >
               <option value="">Válassz...</option>
               <option value="FEMALE">Nő</option>

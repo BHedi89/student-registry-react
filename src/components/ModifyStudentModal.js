@@ -29,7 +29,8 @@ class ModifyStudentModal extends Component {
         gender: this.state.gender
       })
     })
-    .then(resp => resp.json());
+    .then(resp => resp.json())
+    .then(s => this.props.onStudentUpdate(studentId, s));
   }
 
   handleSubmit = (e) => {

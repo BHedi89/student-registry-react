@@ -63,6 +63,7 @@ class StudentRow extends Component {
                     <ModifyStudentModal
                       students={student}
                       closeModal={this.handleCloseModify}
+                      onStudentUpdate={this.props.onStudentUpdate}
                     />
                   </Modal.Body>
                 </Modal>
