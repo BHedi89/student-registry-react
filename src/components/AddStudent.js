@@ -9,7 +9,7 @@ class AddStudent extends Component {
       validated: false,
       name: "",
       email: "",
-      age: null,
+      age: "",
       gender: "",
       showAlert: false,
     };
@@ -31,32 +31,58 @@ class AddStudent extends Component {
       }),
     }).then((resp) => resp.json());
   };
+  
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (this.state.validated !== prevState.validated) {
+  //     this.setState({validated: true});
+  //   }
+  // }
 
   handleSubmit = (e) => {
+    e.preventDefault();
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       e.preventDefault();
       e.stopPropagation();
+      this.setState({validated: true})
     } else {
-        this.setState({
-            validated: true,
-            showAlert: true,
-          },
-          () => {
-            window.setTimeout(() => {
-              this.setState({
-                showAlert: false,
-                name: "",
-                email: "",
-                age: "",
-                gender: "",
-              });
-            }, 2000);
-          }
-        );
-        this.addNewStudent();
+        this.setState({ 
+          validated: true
+        });
+
+        setTimeout(() => {
+          this.handleAlert();
+        }, 5000)
+        console.log("valid");
     }
+
+    console.log("1." + this.state.validated); //false
   };
+
+  handleAlert = () => {
+    console.log("2." + this.state.validated) //true
+    if (this.state.validated === true) {
+      this.setState({
+        showAlert: true,
+      },
+      () => {
+        window.setTimeout(() => {
+          this.setState({
+            validated: false,
+            showAlert: false,
+            name: "",
+            email: "",
+            age: "",
+            gender: "",
+          });
+          console.log("3." + this.state.validated); //false
+        }, 2000);
+        console.log("4." + this.state.validated); //true
+        this.addNewStudent();
+      })
+      
+    }
+  }
 
   inputChangeHandler(changeObject) {
     this.setState(changeObject);
@@ -73,13 +99,18 @@ class AddStudent extends Component {
         <Alert show={this.state.showAlert} variant="success">
           {this.state.name} tanuló sikeresen létrehozva
         </Alert>
-        <Form noValidate validated={this.state.validated}>
+        <Form
+          noValidate
+          validated={this.state.validated}
+          onSubmit={this.handleSubmit}
+        >
           <Form.Group controlId="validationName">
             <Form.Label>Név</Form.Label>
             <Form.Control
+              required
               type="text"
               placeholder="Név"
-              required
+              value={this.state.name}
               onChange={(e) => {
                 this.inputChangeHandler({ name: e.target.value });
               }}
@@ -91,9 +122,10 @@ class AddStudent extends Component {
           <Form.Group controlId="validationEmail">
             <Form.Label>E-mail cím</Form.Label>
             <Form.Control
+              required
               type="email"
               placeholder="E-mail cím"
-              required
+              value={this.state.email}
               onChange={(e) => {
                 this.inputChangeHandler({ email: e.target.value });
               }}
@@ -105,9 +137,10 @@ class AddStudent extends Component {
           <Form.Group controlId="validationAge">
             <Form.Label>Életkor</Form.Label>
             <Form.Control
+              required
               type="number"
               placeholder="Életkor"
-              required
+              value={this.state.age}
               onChange={(e) => {
                 this.inputChangeHandler({ age: e.target.value });
               }}
@@ -122,6 +155,7 @@ class AddStudent extends Component {
               required
               as="select"
               className="custom-select my-1 mr-sm-2"
+              value={this.state.gender}
               onChange={(e) => {
                 this.inputChangeHandler({ gender: e.target.value });
               }}
@@ -138,14 +172,13 @@ class AddStudent extends Component {
               Nem megadása kötelező
             </Form.Control.Feedback>
           </Form.Group>
+          <Button
+            className="btn btn-primary"
+            type="submit"
+          >
+            Mentés
+          </Button>
         </Form>
-        <Button
-          className="btn btn-primary"
-          onClick={this.handleSubmit}
-          type="button"
-        >
-          Mentés
-        </Button>
       </div>
     );
   }

@@ -26,23 +26,20 @@ class StudentList extends Component {
           studentsList.push(studentObj);
         }
         this.setState({
-          students: studentsList
-        })
-        console.log(studentsList);
-        console.log(this.state.students);    
-        console.log(s);
-      }); 
+          students: studentsList,
+        });
+      });
   }
 
   updateStudent = (id, student) => {
     let modifiedStudents = [...this.state.students];
-    let idx = modifiedStudents.findIndex(s => s.id === id);
+    let idx = modifiedStudents.findIndex((s) => s.id === id);
     student.id = id;
     modifiedStudents[idx] = student;
     this.setState({
-      students: modifiedStudents
-    })
-  }
+      students: modifiedStudents,
+    });
+  };
 
   render() {
     return (
@@ -64,7 +61,10 @@ class StudentList extends Component {
             </tr>
           </thead>
           <tbody>
-            <StudentRow students={this.state.students} onStudentUpdate={this.updateStudent} />
+            <StudentRow
+              students={this.state.students}
+              onStudentUpdate={this.updateStudent}
+            />
           </tbody>
         </table>
       </div>
