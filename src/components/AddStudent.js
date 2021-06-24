@@ -31,13 +31,7 @@ class AddStudent extends Component {
       }),
     }).then((resp) => resp.json());
   };
-  
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (this.state.validated !== prevState.validated) {
-  //     this.setState({validated: true});
-  //   }
-  // }
-
+ 
   handleSubmit = (e) => {
     e.preventDefault();
     const form = e.currentTarget;
