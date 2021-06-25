@@ -41,6 +41,16 @@ class StudentList extends Component {
     });
   };
 
+  updateAfterDelete = () => {
+    let deletedStudents = [...this.state.students];
+    console.log(deletedStudents);
+    
+    
+    this.setState({
+      students: deletedStudents
+    })
+  }
+
   render() {
     return (
       <div className="container">
@@ -64,6 +74,7 @@ class StudentList extends Component {
             <StudentRow
               students={this.state.students}
               onStudentUpdate={this.updateStudent}
+              onUpdateAfterDelete={this.updateAfterDelete}
             />
           </tbody>
         </table>
