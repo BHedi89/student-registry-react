@@ -7,6 +7,7 @@ class AddStudent extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isLoading: false,
       validated: false,
       name: "",
       email: "",
@@ -85,90 +86,87 @@ class AddStudent extends Component {
           buttonTitle="Vissza"
           buttonLink="/studentList"
         />
+        <Spinner hidden={this.state.isLoading}/>
         <Alert show={this.state.showAlert} variant="success">
           {this.state.name} tanuló sikeresen létrehozva
         </Alert>
-        {this.state.validated ? (
-          <Spinner />
-        ) : (
-          <Form
-            noValidate
-            validated={this.state.validated}
-            onSubmit={this.handleSubmit}
-          >
-            <Form.Group controlId="validationName">
-              <Form.Label>Név</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="Név"
-                value={this.state.name}
-                onChange={(e) => {
-                  this.inputChangeHandler({ name: e.target.value });
-                }}
-              />
-              <Form.Control.Feedback type="invalid">
-                Név megadása kötelező
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group controlId="validationEmail">
-              <Form.Label>E-mail cím</Form.Label>
-              <Form.Control
-                required
-                type="email"
-                placeholder="E-mail cím"
-                value={this.state.email}
-                onChange={(e) => {
-                  this.inputChangeHandler({ email: e.target.value });
-                }}
-              />
-              <Form.Control.Feedback type="invalid">
-                E-mail cím megadása kötelező
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group controlId="validationAge">
-              <Form.Label>Életkor</Form.Label>
-              <Form.Control
-                required
-                type="number"
-                placeholder="Életkor"
-                value={this.state.age}
-                onChange={(e) => {
-                  this.inputChangeHandler({ age: e.target.value });
-                }}
-              />
-              <Form.Control.Feedback type="invalid">
-                Életkor megadása kötelező
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group controlId="validationGender">
-              <Form.Label className="mr-2">Nem</Form.Label>
-              <Form.Control
-                required
-                as="select"
-                className="custom-select my-1 mr-sm-2"
-                value={this.state.gender}
-                onChange={(e) => {
-                  this.inputChangeHandler({ gender: e.target.value });
-                }}
-              >
-                <option value="">Válassz...</option>
-                <option value="FEMALE">Nő</option>
-                <option value="MALE">Férfi</option>
-                <option value="Egyéb">Egyéb</option>
-                <option value="Nem szeretném megadni">
-                  Nem szeretném megadni
-                </option>
-              </Form.Control>
-              <Form.Control.Feedback type="invalid">
-                Nem megadása kötelező
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Button className="btn btn-primary" type="submit">
-              Mentés
-            </Button>
-          </Form>
-        )}
+        <Form
+          noValidate
+          validated={this.state.validated}
+          onSubmit={this.handleSubmit}
+        >
+          <Form.Group controlId="validationName">
+            <Form.Label>Név</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              placeholder="Név"
+              value={this.state.name}
+              onChange={(e) => {
+                this.inputChangeHandler({ name: e.target.value });
+              }}
+            />
+            <Form.Control.Feedback type="invalid">
+              Név megadása kötelező
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group controlId="validationEmail">
+            <Form.Label>E-mail cím</Form.Label>
+            <Form.Control
+              required
+              type="email"
+              placeholder="E-mail cím"
+              value={this.state.email}
+              onChange={(e) => {
+                this.inputChangeHandler({ email: e.target.value });
+              }}
+            />
+            <Form.Control.Feedback type="invalid">
+              E-mail cím megadása kötelező
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group controlId="validationAge">
+            <Form.Label>Életkor</Form.Label>
+            <Form.Control
+              required
+              type="number"
+              placeholder="Életkor"
+              value={this.state.age}
+              onChange={(e) => {
+                this.inputChangeHandler({ age: e.target.value });
+              }}
+            />
+            <Form.Control.Feedback type="invalid">
+              Életkor megadása kötelező
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group controlId="validationGender">
+            <Form.Label className="mr-2">Nem</Form.Label>
+            <Form.Control
+              required
+              as="select"
+              className="custom-select my-1 mr-sm-2"
+              value={this.state.gender}
+              onChange={(e) => {
+                this.inputChangeHandler({ gender: e.target.value });
+              }}
+            >
+              <option value="">Válassz...</option>
+              <option value="FEMALE">Nő</option>
+              <option value="MALE">Férfi</option>
+              <option value="Egyéb">Egyéb</option>
+              <option value="Nem szeretném megadni">
+                Nem szeretném megadni
+              </option>
+            </Form.Control>
+            <Form.Control.Feedback type="invalid">
+              Nem megadása kötelező
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Button className="btn btn-primary" type="submit">
+            Mentés
+          </Button>
+        </Form>
       </div>
     );
   }

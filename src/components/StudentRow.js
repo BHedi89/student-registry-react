@@ -81,13 +81,13 @@ class StudentRow extends Component {
                   <DeleteStudentModal
                     students={student}
                     closeModal={this.handleCloseDelete}
+                    onUpdateAfterDelete={this.props.onUpdateAfterDelete}
                   />
                 </Modal>
                 <button
                   type="button"
                   className="btn btn-danger btn-sm"
                   onClick={() => this.handleShowDelete(student.id)}
-                  onUpdateAfterDelete={this.props.onUpdateAfterDelete}
                 >
                   Törlés
                 </button>

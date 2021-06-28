@@ -41,14 +41,10 @@ class StudentList extends Component {
     });
   };
 
-  updateAfterDelete = () => {
-    let deletedStudents = [...this.state.students];
-    console.log(deletedStudents);
-    
-    
+  updateAfterDelete = (deletedStudent) => {
     this.setState({
-      students: deletedStudents
-    })
+      students: this.state.students.filter(student => student.id !== deletedStudent)
+    });
   }
 
   render() {
