@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import StudentList from './components/StudentList';
 import { Route, Redirect, Switch } from "react-router-dom";
-import AddStudent from "./components/AddStudent";
+import AddStudent2 from "./components/AddStudent2";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
           <StudentList/>
         </Route>
         <Route path='/addStudent' exact>
-          <AddStudent/>
+          <AddStudent2/>
         </Route>
       </Switch>
 
