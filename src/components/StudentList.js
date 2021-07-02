@@ -67,11 +67,17 @@ class StudentList extends Component {
             </tr>
           </thead>
           <tbody>
-            <StudentRow
-              students={this.state.students}
-              onStudentUpdate={this.updateStudent}
-              onUpdateAfterDelete={this.updateAfterDelete}
-            />
+            {this.state.students.length !== 0 
+              ?
+               <StudentRow
+                students={this.state.students}
+                onStudentUpdate={this.updateStudent}
+                onUpdateAfterDelete={this.updateAfterDelete}
+              />
+              :
+              <p>Nincs hallgató az adatbázisban!</p>
+            }
+           
           </tbody>
         </table>
       </div>
