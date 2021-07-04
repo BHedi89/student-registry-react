@@ -1,13 +1,15 @@
 import { Component } from "react";
 import Header from "./Header";
 import StudentRow from "./StudentRow";
+import Filter from "./Filter";
+
 
 class StudentList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       students: [],
-      modal: "",
+      filter: "",
     };
   }
 
@@ -43,8 +45,14 @@ class StudentList extends Component {
 
   updateAfterDelete = (deletedStudent) => {
     this.setState({
-      students: this.state.students.filter(student => student.id !== deletedStudent)
+      students: this.state.students.filter(
+        (student) => student.id !== deletedStudent
+      ),
     });
+  };
+
+  handleChange = (e) => {
+    this.setState({filter: e.target.value})
   }
 
   render() {
@@ -55,6 +63,7 @@ class StudentList extends Component {
           buttonTitle="Hozzáadás"
           buttonLink="/addStudent"
         />
+        <Filter handleChange={this.handleChange} />
         <table className="table table-bordered table-striped">
           <thead>
             <tr>
@@ -67,17 +76,27 @@ class StudentList extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.students.length !== 0 
-              ?
-               <StudentRow
-                students={this.state.students}
+            {this.state.students.length !== 0 ? (
+              <StudentRow
+                students={this.state.students.filter((filteredStudent) => {
+                  if (this.state.filter === "") {
+                    return filteredStudent;
+                  } else if (filteredStudent.name.toLowerCase().includes(this.state.filter.toLowerCase())){
+                    return filteredStudent;
+                  } 
+                })}
                 onStudentUpdate={this.updateStudent}
                 onUpdateAfterDelete={this.updateAfterDelete}
               />
-              :
-              <p>Nincs hallgató az adatbázisban!</p>
-            }
-           
+            ) : (
+              <tr>
+                <td>Nincs hallgató az adatbázisban!</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
