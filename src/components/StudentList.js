@@ -71,8 +71,9 @@ class StudentList extends Component {
               <th scope="col">E-mail cím</th>
               <th scope="col">Életkor</th>
               <th scope="col">Nem</th>
-              {/* <th scope="col">Könyvek száma</th> */}
-              <th scope="col" />
+              <th scope="col">Könyvek száma</th>
+              <th scope="col">Módosítás/Törlés</th>
+              <th scope="col">Új könyv hozzáadása</th>
             </tr>
           </thead>
           <tbody>

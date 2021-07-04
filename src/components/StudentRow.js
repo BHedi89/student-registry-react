@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import ModifyStudentModal from "./ModifyStudentModal";
 import { Modal } from "react-bootstrap";
 import DeleteStudentModal from "./DeleteStudentModal";
+import { Link } from "react-router-dom";
 
 class StudentRow extends Component {
   constructor(props) {
@@ -50,6 +51,7 @@ class StudentRow extends Component {
               <td>{student.email}</td>
               <td>{student.age}</td>
               <td>{student.gender === "FEMALE" ? "nő" : "férfi"}</td>
+              <td></td>
               <td>
                 <Modal
                   animation={false}
@@ -91,6 +93,11 @@ class StudentRow extends Component {
                 >
                   Törlés
                 </button>
+              </td>
+              <td>
+                <Link to="/studentBooks">
+                  <button className="btn btn-info btn-sm">Új könyv hozzáadása</button>
+                </Link>
               </td>
             </tr>
           );
