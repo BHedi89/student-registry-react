@@ -16,10 +16,11 @@ class StudentBooks extends Component {
     this.setState({
       showForm: !this.state.showForm,
     });
-    console.log(this.state);
   }
 
   render() {
+    console.log(this.props.location)
+    console.log(this.props.location.state.books)
     return (
       <div className="container">
         <Header
@@ -33,7 +34,7 @@ class StudentBooks extends Component {
         >
           Új könyv hozzáadása
         </button>
-        {this.state.showForm ? <NewBookForm /> : null}
+        {this.state.showForm ? <NewBookForm studentId={this.props.location.state.id}/> : null}
 
         <Table striped bordered hover>
           <thead>

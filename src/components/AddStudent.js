@@ -122,7 +122,8 @@ class AddStudent2 extends Component {
         name: "",
         email: "",
         age: "",
-        gender: ""
+        gender: "",
+        formValid: false
       })
     }, 2000);
     this.addStudent();

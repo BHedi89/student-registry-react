@@ -1,7 +1,7 @@
 import { Component } from "react";
-import Header from "./Header";
+import Header from "../components/Header";
 import { Form, Button, Alert } from "react-bootstrap";
-import Spinner from "../otherComponents/Spinner";
+import Spinner from "./Spinner";
 
 class AddStudent extends Component {
   constructor(props) {
