@@ -7,6 +7,10 @@ import { Component } from "react";
 import StudentBooks from "./components/StudentBooks";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <Switch>
@@ -19,9 +23,11 @@ class App extends Component {
         <Route path="/addStudent" exact>
           <AddStudent2 />
         </Route>
-        <Route path="/studentBooks" exact>
-          <StudentBooks />
-        </Route>
+        <Route
+          path="/studentBooks/:studentId"
+          component={StudentBooks}
+          exact
+        />
       </Switch>
     );
   }

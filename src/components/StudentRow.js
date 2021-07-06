@@ -11,7 +11,7 @@ class StudentRow extends Component {
       showModify: false,
       showDelete: false,
       modifyModal: "",
-      deleteModal: ""
+      deleteModal: "",
     };
   }
 
@@ -95,8 +95,12 @@ class StudentRow extends Component {
                 </button>
               </td>
               <td>
-                <Link to="/studentBooks">
-                  <button className="btn btn-info btn-sm">Új könyv hozzáadása</button>
+                <Link to={{pathname: `/studentBooks/${student.id}`, state: student}}>
+                  <button 
+                    className="btn btn-info btn-sm"
+                  >
+                    Új könyv hozzáadása
+                  </button>
                 </Link>
               </td>
             </tr>
