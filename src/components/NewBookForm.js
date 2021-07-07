@@ -59,7 +59,7 @@ class NewBookForm extends Component {
         publisher: this.state.publisher,
         pages: parseFloat(this.state.pages),
         description: this.state.description,
-        website: this.state.website,
+        website: this.state.website
       }),
     });
   };
@@ -287,7 +287,7 @@ class NewBookForm extends Component {
               <Form.Label>Kiadás dátuma</Form.Label>
               <Form.Control
                 required
-                type="text"
+                type="date"
                 placeholder="Kiadás dátuma"
                 name="published"
                 value={this.state.published}

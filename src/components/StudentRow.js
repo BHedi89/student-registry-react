@@ -44,18 +44,45 @@ class StudentRow extends Component {
   render() {
     return (
       <Fragment>
-        { this.props.students.map((student) => {
+        {this.props.students.map((student) => {
+          let booksNum = 0;
+          for (const book in student.books) {
+            booksNum += 1;
+          }
           return (
             <tr key={student.id}>
               <td>{student.name}</td>
               <td>{student.email}</td>
               <td>{student.age}</td>
               <td>{student.gender === "FEMALE" ? "nő" : "férfi"}</td>
-              <td></td>
+              <td>
+                {booksNum === 0 ? (
+                  <Link
+                  to={{
+                    pathname: `/studentBooks/${student.id}`,
+                    state: student,
+                  }}
+                >
+                  Nincs
+                </Link>
+                ) : (
+                  <Link
+                    to={{
+                      pathname: `/studentBooks/${student.id}`,
+                      state: student,
+                    }}
+                  >
+                    {booksNum}
+                  </Link>
+                )}
+              </td>
               <td>
                 <Modal
                   animation={false}
-                  show={this.state.showModify && this.state.modifyModal === student.id}
+                  show={
+                    this.state.showModify &&
+                    this.state.modifyModal === student.id
+                  }
                   onHide={this.handleCloseModify}
                 >
                   <Modal.Header closeButton>
@@ -78,7 +105,10 @@ class StudentRow extends Component {
                 </button>
                 <Modal
                   animation={false}
-                  show={this.state.showDelete && this.state.deleteModal === student.id}
+                  show={
+                    this.state.showDelete &&
+                    this.state.deleteModal === student.id
+                  }
                 >
                   <DeleteStudentModal
                     students={student}
@@ -94,15 +124,18 @@ class StudentRow extends Component {
                   Törlés
                 </button>
               </td>
-              <td>
-                <Link to={{pathname: `/studentBooks/${student.id}`, state: student}}>
-                  <button 
-                    className="btn btn-info btn-sm"
-                  >
+              {/* <td>
+                <Link
+                  to={{
+                    pathname: `/studentBooks/${student.id}`,
+                    state: student,
+                  }}
+                >
+                  <button className="btn btn-info btn-sm">
                     Új könyv hozzáadása
                   </button>
                 </Link>
-              </td>
+              </td> */}
             </tr>
           );
         })}

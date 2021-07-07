@@ -19,8 +19,27 @@ class StudentBooks extends Component {
   }
 
   render() {
-    console.log(this.props.location)
-    console.log(this.props.location.state.books)
+    const books = [];
+    for (const key in this.props.location.state.books) {
+      books.push(
+        <tr>
+          <td>{this.props.location.state.books[key].author}</td>
+          <td>{this.props.location.state.books[key].title}</td>
+          <td>{this.props.location.state.books[key].subtitle}</td>
+          <td>
+            <Link
+              to={{
+                pathname: this.props.location.state.books[key].website,
+              }}
+              target="_blank"
+            >
+              {this.props.location.state.books[key].website}
+            </Link>
+          </td>
+        </tr>
+      );
+    }
+
     return (
       <div className="container">
         <Header
@@ -34,7 +53,9 @@ class StudentBooks extends Component {
         >
           Új könyv hozzáadása
         </button>
-        {this.state.showForm ? <NewBookForm studentId={this.props.location.state.id}/> : null}
+        {this.state.showForm ? (
+          <NewBookForm studentId={this.props.location.state.id} />
+        ) : null}
 
         <Table striped bordered hover>
           <thead>
@@ -45,14 +66,7 @@ class StudentBooks extends Component {
               <th>Weboldal</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td><Link>xy</Link></td>
-            </tr>
-          </tbody>
+          <tbody>{books}</tbody>
         </Table>
       </div>
     );
