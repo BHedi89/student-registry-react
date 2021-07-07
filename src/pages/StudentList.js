@@ -1,7 +1,7 @@
 import { Component } from "react";
-import Header from "./Header";
+import Header from "../headers, footers/Header";
 import StudentRow from "./StudentRow";
-import Filter from "./Filter";
+import Filter from "../filter/Filter";
 
 
 class StudentList extends Component {

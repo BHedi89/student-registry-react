@@ -1,10 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import StudentList from "./components/StudentList";
+import StudentList from "./pages/StudentList";
 import { Route, Redirect, Switch } from "react-router-dom";
-import AddStudent2 from "./components/AddStudent";
+import AddStudent from "./forms/AddStudent";
 import { Component } from "react";
-import StudentBooks from "./components/StudentBooks";
+import StudentBooks from "./pages/StudentBooks";
 
 class App extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class App extends Component {
           <StudentList />
         </Route>
         <Route path="/addStudent" exact>
-          <AddStudent2 />
+          <AddStudent />
         </Route>
         <Route
           path="/studentBooks/:studentId"

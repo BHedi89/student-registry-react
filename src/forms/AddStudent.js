@@ -1,8 +1,8 @@
 import { Component } from "react";
 import { Form, Alert, Button } from "react-bootstrap";
-import Header from "./Header";
+import Header from "../headers, footers/Header";
 import classes from "./AddStudent.module.css";
-import { FormErrors } from "./FormErrors";
+import { FormErrors } from "../error/FormErrors";
 
 class AddStudent2 extends Component {
   constructor(props) {

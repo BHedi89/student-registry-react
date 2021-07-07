@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
-import ModifyStudentModal from "./ModifyStudentModal";
+import ModifyStudentModal from "../modals/ModifyStudentModal";
 import { Modal } from "react-bootstrap";
-import DeleteStudentModal from "./DeleteStudentModal";
+import DeleteStudentModal from "../modals/DeleteStudentModal";
 import { Link } from "react-router-dom";
 
 class StudentRow extends Component {

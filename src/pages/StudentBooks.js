@@ -1,6 +1,6 @@
 import { Component } from "react";
-import Header from "./Header";
-import NewBookForm from "./NewBookForm";
+import Header from "../headers, footers/Header";
+import NewBookForm from "../forms/NewBookForm";
 import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 

@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Form, Col, Button, Alert } from "react-bootstrap";
-import { FormErrors } from "./FormErrors";
+import { FormErrors } from "../error/FormErrors";
 import classes from "./NewBookForm.module.css";
 
 class NewBookForm extends Component {
