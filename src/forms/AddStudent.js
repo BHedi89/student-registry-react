@@ -4,7 +4,7 @@ import Header from "../headers, footers/Header";
 import classes from "./AddStudent.module.css";
 import { FormErrors } from "../error/FormErrors";
 
-class AddStudent2 extends Component {
+class AddStudent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -224,4 +224,4 @@ class AddStudent2 extends Component {
   }
 }
 
-export default AddStudent2;
+export default AddStudent;

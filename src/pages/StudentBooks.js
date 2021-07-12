@@ -9,6 +9,7 @@ class StudentBooks extends Component {
     super(props);
     this.state = {
       showForm: false,
+      students: this.props.students,
     };
   }
 
@@ -17,6 +18,16 @@ class StudentBooks extends Component {
       showForm: !this.state.showForm,
     });
   }
+
+  updateBooks = (id, student) => {
+    let modifiedStudents = [...this.state.students];
+    let idx = modifiedStudents.findIndex((s) => s.id === id);
+    student.id = id;
+    modifiedStudents[idx] = student;
+    this.setState({
+      students: modifiedStudents,
+    });
+  };
 
   render() {
     const books = [];
@@ -39,7 +50,6 @@ class StudentBooks extends Component {
         </tr>
       );
     }
-
     return (
       <div className="container">
         <Header
@@ -53,10 +63,15 @@ class StudentBooks extends Component {
         >
           Új könyv hozzáadása
         </button>
+        <button
+          className="btn btn-info mb-3 ml-2"
+          onClick={this.updateBooks}
+        >
+          Adatok frissítése
+        </button>
         {this.state.showForm ? (
           <NewBookForm studentId={this.props.location.state.id} />
         ) : null}
-
         <Table striped bordered hover>
           <thead>
             <tr>

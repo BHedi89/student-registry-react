@@ -124,18 +124,6 @@ class StudentRow extends Component {
                   Törlés
                 </button>
               </td>
-              {/* <td>
-                <Link
-                  to={{
-                    pathname: `/studentBooks/${student.id}`,
-                    state: student,
-                  }}
-                >
-                  <button className="btn btn-info btn-sm">
-                    Új könyv hozzáadása
-                  </button>
-                </Link>
-              </td> */}
             </tr>
           );
         })}

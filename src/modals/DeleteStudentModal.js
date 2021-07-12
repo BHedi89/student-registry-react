@@ -18,7 +18,7 @@ class DeleteStudentModal extends Component {
         method: "DELETE"
     })
     .then(resp => resp.json())
-    .then(() => this.props.onUpdateAfterDelete(studentId)); // null
+    .then(() => this.props.onUpdateAfterDelete(studentId));
   }
 
   handleSubmit = () => {

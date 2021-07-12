@@ -61,7 +61,9 @@ class NewBookForm extends Component {
         description: this.state.description,
         website: this.state.website
       }),
-    });
+    })
+    .then(resp => resp.json())
+    .then(book => this.props.onUpdateBooks(studentId, book));
   };
 
   handleChange = (event) => {
@@ -200,7 +202,7 @@ class NewBookForm extends Component {
     }, 2000);
     this.addNewBook();
   };
-
+  
   render() {
     return (
       <>
