@@ -9,9 +9,30 @@ class StudentBooks extends Component {
     super(props);
     this.state = {
       showForm: false,
-      students: this.props.students,
+      student: [],
     };
   }
+
+  componentDidMount() {
+    const studentId = this.props.location.state.id;
+    const FIREBASE_DOMAIN =
+      "https://students-administration-67d7b-default-rtdb.europe-west1.firebasedatabase.app";
+    fetch(`${FIREBASE_DOMAIN}/students/${studentId}.json`)
+      .then((resp) => resp.json())
+      .then((s) => {
+        this.setState({
+          student: s,
+        });
+      });
+  }
+
+  updateStudentBooks = (student) => {
+    let modifiedStudentBook = { ...this.state.student};
+    modifiedStudentBook = student;
+    this.setState({
+      student: modifiedStudentBook,
+    });
+  };
 
   toggleForm() {
     this.setState({
@@ -19,32 +40,22 @@ class StudentBooks extends Component {
     });
   }
 
-  updateBooks = (id, student) => {
-    let modifiedStudents = [...this.state.students];
-    let idx = modifiedStudents.findIndex((s) => s.id === id);
-    student.id = id;
-    modifiedStudents[idx] = student;
-    this.setState({
-      students: modifiedStudents,
-    });
-  };
-
   render() {
     const books = [];
-    for (const key in this.props.location.state.books) {
+    for (const key in this.state.student.books) {
       books.push(
-        <tr>
-          <td>{this.props.location.state.books[key].author}</td>
-          <td>{this.props.location.state.books[key].title}</td>
-          <td>{this.props.location.state.books[key].subtitle}</td>
+        <tr key={this.state.student.books[key].isbn}>
+          <td>{this.state.student.books[key].author}</td>
+          <td>{this.state.student.books[key].title}</td>
+          <td>{this.state.student.books[key].subtitle}</td>
           <td>
             <Link
               to={{
-                pathname: this.props.location.state.books[key].website,
+                pathname: this.state.student.books[key].website,
               }}
               target="_blank"
             >
-              {this.props.location.state.books[key].website}
+              {this.state.student.books[key].website}
             </Link>
           </td>
         </tr>
@@ -55,7 +66,7 @@ class StudentBooks extends Component {
         <Header
           buttonLink="/studentList"
           buttonTitle="Vissza"
-          title={`${this.props.location.state.name} könyvei`}
+          title={`${this.state.student.name} könyvei`}
         />
         <button
           className="btn btn-primary mb-3"
@@ -63,14 +74,12 @@ class StudentBooks extends Component {
         >
           Új könyv hozzáadása
         </button>
-        <button
-          className="btn btn-info mb-3 ml-2"
-          onClick={this.updateBooks}
-        >
-          Adatok frissítése
-        </button>
         {this.state.showForm ? (
-          <NewBookForm studentId={this.props.location.state.id} />
+          <NewBookForm
+            studentId={this.props.location.state.id}
+            studentData={this.state.student}
+            onUpdateStudentsBook={this.updateStudentBooks}
+          />
         ) : null}
         <Table striped bordered hover>
           <thead>

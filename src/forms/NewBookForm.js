@@ -63,7 +63,11 @@ class NewBookForm extends Component {
       }),
     })
     .then(resp => resp.json())
-    .then(book => this.props.onUpdateBooks(studentId, book));
+    .then(() => {
+      fetch(`${FIREBASE_DOMAIN}/students/${studentId}.json`)
+        .then(resp => resp.json())
+        .then(book => this.props.onUpdateStudentsBook(book));
+    });
   };
 
   handleChange = (event) => {
