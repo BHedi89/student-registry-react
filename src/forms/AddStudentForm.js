@@ -1,10 +1,10 @@
 import { Component } from "react";
 import { Form, Alert, Button } from "react-bootstrap";
 import Header from "../headers, footers/Header";
-import classes from "./AddStudent.module.css";
+import classes from "./AddStudentForm.module.css";
 import { FormErrors } from "../error/FormErrors";
 
-class AddStudent extends Component {
+class AddStudentForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -224,4 +224,4 @@ class AddStudent extends Component {
   }
 }
 
-export default AddStudent;
+export default AddStudentForm;

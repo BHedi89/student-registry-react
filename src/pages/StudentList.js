@@ -83,7 +83,9 @@ class StudentList extends Component {
                     return filteredStudent;
                   } else if (filteredStudent.name.toLowerCase().includes(this.state.filter.toLowerCase())){
                     return filteredStudent;
-                  } 
+                  } else {
+                    return "";
+                  }
                 })}
                 onStudentUpdate={this.updateStudent}
                 onUpdateAfterDelete={this.updateAfterDelete}

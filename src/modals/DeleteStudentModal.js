@@ -2,10 +2,6 @@ import { Modal, Button } from "react-bootstrap";
 import { Component } from "react";
 
 class DeleteStudentModal extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   closeModal = () => {
     this.props.closeModal();
   }

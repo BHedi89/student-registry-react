@@ -1,5 +1,4 @@
 import { Component } from "react";
-// import AddStudent from './AddStudent';
 import { Link } from "react-router-dom";
 
 

@@ -2,15 +2,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import StudentList from "./pages/StudentList";
 import { Route, Redirect, Switch } from "react-router-dom";
-import AddStudent from "./forms/AddStudent";
+import AddStudentForm from "./forms/AddStudentForm";
 import { Component } from "react";
 import StudentBooks from "./pages/StudentBooks";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <Switch>
@@ -21,7 +17,7 @@ class App extends Component {
           <StudentList />
         </Route>
         <Route path="/addStudent" exact>
-          <AddStudent />
+          <AddStudentForm />
         </Route>
         <Route
           path="/studentBooks/:studentId"
