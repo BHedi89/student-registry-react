@@ -30,7 +30,7 @@ class ModifyStudentModal extends Component {
       })
     })
     .then(resp => resp.json())
-    .then(s => this.props.onStudentUpdate(studentId, s));
+    .then(updatedStudent => this.props.onStudentUpdate(studentId, updatedStudent));
   }
 
   handleSubmit = (e) => {
@@ -44,8 +44,8 @@ class ModifyStudentModal extends Component {
     }
   };
 
-  inputChangeHandler(changeObject) {
-    this.setState(changeObject);
+  inputChangeHandler(changeStudentDataObject) {
+    this.setState(changeStudentDataObject);
   };
 
   render() {

@@ -19,16 +19,16 @@ class StudentBooks extends Component {
       "https://students-administration-67d7b-default-rtdb.europe-west1.firebasedatabase.app";
     fetch(`${FIREBASE_DOMAIN}/students/${studentId}.json`)
       .then((resp) => resp.json())
-      .then((s) => {
+      .then((studentData) => {
         this.setState({
-          student: s,
+          student: studentData,
         });
       });
   }
 
-  updateStudentBooks = (student) => {
+  updateStudentBooks = (updatedStudentData) => {
     let modifiedStudentBook = { ...this.state.student};
-    modifiedStudentBook = student;
+    modifiedStudentBook = updatedStudentData;
     this.setState({
       student: modifiedStudentBook,
     });

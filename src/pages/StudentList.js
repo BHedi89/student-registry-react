@@ -19,11 +19,11 @@ class StudentList extends Component {
       "https://students-administration-67d7b-default-rtdb.europe-west1.firebasedatabase.app";
     fetch(`${FIREBASE_DOMAIN}/students.json`)
       .then((resp) => resp.json())
-      .then((s) => {
-        for (const key in s) {
+      .then((students) => {
+        for (const key in students) {
           const studentObj = {
             id: key,
-            ...s[key],
+            ...students[key],
           };
           studentsList.push(studentObj);
         }
@@ -35,7 +35,7 @@ class StudentList extends Component {
 
   updateStudent = (id, student) => {
     let modifiedStudents = [...this.state.students];
-    let idx = modifiedStudents.findIndex((s) => s.id === id);
+    let idx = modifiedStudents.findIndex((student) => student.id === id);
     student.id = id;
     modifiedStudents[idx] = student;
     this.setState({
