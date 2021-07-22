@@ -2,6 +2,7 @@ import { Component } from "react";
 import Header from "../headers, footers/Header";
 import StudentRow from "./StudentRow";
 import Filter from "../filter/Filter";
+import { getAllStudent } from "../http/studentService";
 
 
 class StudentList extends Component {
@@ -15,10 +16,7 @@ class StudentList extends Component {
 
   componentDidMount() {
     const studentsList = [];
-    const FIREBASE_DOMAIN =
-      "https://students-administration-67d7b-default-rtdb.europe-west1.firebasedatabase.app";
-    fetch(`${FIREBASE_DOMAIN}/students.json`)
-      .then((resp) => resp.json())
+    getAllStudent()
       .then((students) => {
         for (const key in students) {
           const studentObj = {

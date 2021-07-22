@@ -3,6 +3,7 @@ import { Form, Alert, Button } from "react-bootstrap";
 import Header from "../headers, footers/Header";
 import classes from "./AddStudentForm.module.css";
 import { FormErrors } from "../error/FormErrors";
+import { addNewStudent, Student } from "../http/studentService";
 
 class AddStudentForm extends Component {
   constructor(props) {
@@ -26,23 +27,6 @@ class AddStudentForm extends Component {
       formValid: false,
     };
   }
-
-  addStudent = () => {
-    const FIREBASE_DOMAIN =
-      "https://students-administration-67d7b-default-rtdb.europe-west1.firebasedatabase.app";
-    fetch(`${FIREBASE_DOMAIN}/students.json`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: this.state.name,
-        email: this.state.email,
-        age: parseInt(this.state.age),
-        gender: this.state.gender,
-      }),
-    });
-  };
 
   handleChange = (event) => {
     const name = event.target.name;
@@ -117,16 +101,23 @@ class AddStudentForm extends Component {
     event.preventDefault();
     this.setState({ showAlert: true });
     setTimeout(() => {
-      this.setState({ 
+      this.setState({
         showAlert: false,
         name: "",
         email: "",
         age: "",
         gender: "",
-        formValid: false
-      })
+        formValid: false,
+      });
     }, 2000);
-    this.addStudent();
+    addNewStudent(
+      new Student(
+        this.state.name,
+        this.state.age,
+        this.state.email,
+        this.state.gender
+      )
+    );
   };
 
   render() {

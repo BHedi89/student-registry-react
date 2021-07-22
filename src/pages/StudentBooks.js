@@ -3,6 +3,7 @@ import Header from "../headers, footers/Header";
 import NewBookForm from "../forms/NewBookForm";
 import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { getSingleStudent } from "../http/studentService";
 
 class StudentBooks extends Component {
   constructor(props) {
@@ -15,10 +16,7 @@ class StudentBooks extends Component {
 
   componentDidMount() {
     const studentId = this.props.location.state.id;
-    const FIREBASE_DOMAIN =
-      "https://students-administration-67d7b-default-rtdb.europe-west1.firebasedatabase.app";
-    fetch(`${FIREBASE_DOMAIN}/students/${studentId}.json`)
-      .then((resp) => resp.json())
+    getSingleStudent(studentId)
       .then((studentData) => {
         this.setState({
           student: studentData,

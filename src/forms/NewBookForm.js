@@ -2,6 +2,8 @@ import { Component } from "react";
 import { Form, Col, Button, Alert } from "react-bootstrap";
 import { FormErrors } from "../error/FormErrors";
 import classes from "./NewBookForm.module.css";
+import { addNewBook, Book } from "../http/bookService";
+import { getSingleStudent } from "../http/studentService";
 
 class NewBookForm extends Component {
   constructor(props) {
@@ -40,35 +42,6 @@ class NewBookForm extends Component {
       formValid: false,
     };
   }
-
-  addNewBook = () => {
-    const studentId = this.props.studentId;
-    const FIREBASE_DOMAIN =
-      "https://students-administration-67d7b-default-rtdb.europe-west1.firebasedatabase.app";
-    fetch(`${FIREBASE_DOMAIN}/students/${studentId}/books.json`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        isbn: this.state.isbn,
-        title: this.state.title,
-        subtitle: this.state.subtitle,
-        author: this.state.author,
-        published: this.state.published,
-        publisher: this.state.publisher,
-        pages: parseFloat(this.state.pages),
-        description: this.state.description,
-        website: this.state.website
-      }),
-    })
-    .then(resp => resp.json())
-    .then(() => {
-      fetch(`${FIREBASE_DOMAIN}/students/${studentId}.json`)
-        .then(resp => resp.json())
-        .then(book => this.props.onUpdateStudentsBook(book));
-    });
-  };
 
   handleChange = (event) => {
     const name = event.target.name;
@@ -190,7 +163,7 @@ class NewBookForm extends Component {
     event.preventDefault();
     this.setState({ showAlert: true });
     setTimeout(() => {
-      this.setState({ 
+      this.setState({
         showAlert: false,
         isbn: "",
         title: "",
@@ -201,13 +174,31 @@ class NewBookForm extends Component {
         pages: "",
         description: "",
         website: "",
-        formValid: false
-      })
+        formValid: false,
+      });
     }, 2000);
-    this.addNewBook();
+    addNewBook(
+      this.props.studentId,
+      new Book(
+        this.state.isbn,
+        this.state.title,
+        this.state.subtitle,
+        this.state.author,
+        this.state.published,
+        this.state.publisher,
+        this.state.pages,
+        this.state.description,
+        this.state.website
+      )
+    ).then(() => {
+      getSingleStudent(this.props.studentId).then((book) =>
+        this.props.onUpdateStudentsBook(book)
+      );
+    });
   };
-  
+
   render() {
+    console.log(this.props);
     return (
       <>
         <Alert show={this.state.showAlert} variant="success">

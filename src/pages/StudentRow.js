@@ -8,36 +8,21 @@ class StudentRow extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showModify: false,
-      showDelete: false,
-      modifyModal: "",
-      deleteModal: "",
+      show: null,
+      studentId: null
     };
   }
 
-  handleCloseModify = () => {
+  handleCloseModal = (id) => {
     this.setState({
-      showModify: false,
+      show: id
     });
   };
 
-  handleShowModify(id) {
+  handleShowModal(studentId, modalId) {
     this.setState({
-      showModify: true,
-      modifyModal: id,
-    });
-  }
-
-  handleCloseDelete = () => {
-    this.setState({
-      showDelete: false,
-    });
-  };
-
-  handleShowDelete(id) {
-    this.setState({
-      showDelete: true,
-      deleteModal: id,
+      studentId: studentId,
+      show: modalId
     });
   }
 
@@ -45,6 +30,7 @@ class StudentRow extends Component {
     return (
       <Fragment>
         {this.props.students.map((student) => {
+          console.log(student)
           let booksNum = 0;
           for (const book in student.books) {
             booksNum += 1;
@@ -80,10 +66,9 @@ class StudentRow extends Component {
                 <Modal
                   animation={false}
                   show={
-                    this.state.showModify &&
-                    this.state.modifyModal === student.id
+                    this.state.show === "modal1" && this.state.studentId === student.id
                   }
-                  onHide={this.handleCloseModify}
+                  onHide={this.handleCloseModal}
                 >
                   <Modal.Header closeButton>
                     <Modal.Title>Adatok módosítása</Modal.Title>
@@ -91,7 +76,7 @@ class StudentRow extends Component {
                   <Modal.Body>
                     <ModifyStudentModal
                       students={student}
-                      closeModal={this.handleCloseModify}
+                      closeModal={this.handleCloseModal}
                       onStudentUpdate={this.props.onStudentUpdate}
                     />
                   </Modal.Body>
@@ -99,27 +84,26 @@ class StudentRow extends Component {
                 <button
                   type="button"
                   className="btn btn-warning btn-sm mr-2"
-                  onClick={() => this.handleShowModify(student.id)}
+                  onClick={() => this.handleShowModal(student.id, "modal1")}
                 >
                   Módosítás
                 </button>
                 <Modal
                   animation={false}
                   show={
-                    this.state.showDelete &&
-                    this.state.deleteModal === student.id
+                    this.state.show === "modal2" && this.state.studentId === student.id
                   }
                 >
                   <DeleteStudentModal
                     students={student}
-                    closeModal={this.handleCloseDelete}
+                    closeModal={this.handleCloseModal}
                     onUpdateAfterDelete={this.props.onUpdateAfterDelete}
                   />
                 </Modal>
                 <button
                   type="button"
                   className="btn btn-danger btn-sm"
-                  onClick={() => this.handleShowDelete(student.id)}
+                  onClick={() => this.handleShowModal(student.id, "modal2")}
                 >
                   Törlés
                 </button>
