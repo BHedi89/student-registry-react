@@ -3,6 +3,7 @@ import Header from "../headers, footers/Header";
 import StudentRow from "./StudentRow";
 import Filter from "../filter/Filter";
 import { getAllStudent } from "../http/studentService";
+import { Table } from "react-bootstrap";
 
 
 class StudentList extends Component {
@@ -62,7 +63,7 @@ class StudentList extends Component {
           buttonLink="/addStudent"
         />
         <Filter handleChange={this.handleChange} />
-        <table className="table table-bordered table-striped">
+        <Table striped bordered hover variant="dark">
           <thead>
             <tr>
               <th scope="col">Név</th>
@@ -99,7 +100,7 @@ class StudentList extends Component {
               </tr>
             )}
           </tbody>
-        </table>
+        </Table>
       </div>
     );
   }

@@ -3,26 +3,29 @@ import ModifyStudentModal from "../modals/ModifyStudentModal";
 import { Modal } from "react-bootstrap";
 import DeleteStudentModal from "../modals/DeleteStudentModal";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 
 class StudentRow extends Component {
   constructor(props) {
     super(props);
     this.state = {
       show: null,
-      studentId: null
+      studentId: null,
     };
   }
 
   handleCloseModal = (id) => {
     this.setState({
-      show: id
+      show: id,
     });
   };
 
   handleShowModal(studentId, modalId) {
     this.setState({
       studentId: studentId,
-      show: modalId
+      show: modalId,
     });
   }
 
@@ -43,13 +46,13 @@ class StudentRow extends Component {
               <td>
                 {booksNum === 0 ? (
                   <Link
-                  to={{
-                    pathname: `/studentBooks/${student.id}`,
-                    state: student,
-                  }}
-                >
-                  Nincs
-                </Link>
+                    to={{
+                      pathname: `/studentBooks/${student.id}`,
+                      state: student,
+                    }}
+                  >
+                    Nincs
+                  </Link>
                 ) : (
                   <Link
                     to={{
@@ -65,7 +68,8 @@ class StudentRow extends Component {
                 <Modal
                   animation={false}
                   show={
-                    this.state.show === "modal1" && this.state.studentId === student.id
+                    this.state.show === "modal1" &&
+                    this.state.studentId === student.id
                   }
                   onHide={this.handleCloseModal}
                 >
@@ -80,17 +84,17 @@ class StudentRow extends Component {
                     />
                   </Modal.Body>
                 </Modal>
-                <button
+                <FontAwesomeIcon
+                  className="mr-4"
+                  icon={faPen}
                   type="button"
-                  className="btn btn-warning btn-sm mr-2"
                   onClick={() => this.handleShowModal(student.id, "modal1")}
-                >
-                  Módosítás
-                </button>
+                />
                 <Modal
                   animation={false}
                   show={
-                    this.state.show === "modal2" && this.state.studentId === student.id
+                    this.state.show === "modal2" &&
+                    this.state.studentId === student.id
                   }
                 >
                   <DeleteStudentModal
@@ -99,13 +103,11 @@ class StudentRow extends Component {
                     onUpdateAfterDelete={this.props.onUpdateAfterDelete}
                   />
                 </Modal>
-                <button
+                <FontAwesomeIcon
+                  icon={faTrash}
                   type="button"
-                  className="btn btn-danger btn-sm"
                   onClick={() => this.handleShowModal(student.id, "modal2")}
-                >
-                  Törlés
-                </button>
+                />
               </td>
             </tr>
           );
