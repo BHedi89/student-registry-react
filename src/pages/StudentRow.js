@@ -30,7 +30,6 @@ class StudentRow extends Component {
     return (
       <Fragment>
         {this.props.students.map((student) => {
-          console.log(student)
           let booksNum = 0;
           for (const book in student.books) {
             booksNum += 1;

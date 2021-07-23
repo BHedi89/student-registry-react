@@ -198,7 +198,6 @@ class NewBookForm extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <>
         <Alert show={this.state.showAlert} variant="success">

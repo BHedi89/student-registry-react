@@ -3,10 +3,6 @@ import { Component } from "react";
 import { deleteStudent } from "../http/studentService";
 
 class DeleteStudentModal extends Component {
-  closeModal = () => {
-    this.props.closeModal();
-  };
-
   handleSubmit = () => {
     deleteStudent(this.props.students.id).then(() =>
       this.props.onUpdateAfterDelete(this.props.students.id)
@@ -24,7 +20,7 @@ class DeleteStudentModal extends Component {
           Biztosan végleg törölni akarja a tanuló adatait?
         </Modal.Body>
         <Modal.Footer>
-          <Button className="btn btn-secondary" onClick={this.closeModal}>
+          <Button className="btn btn-secondary" onClick={this.props.closeModal}>
             Mégsem
           </Button>
           <Button className="btn btn-danger" onClick={this.handleSubmit}>
