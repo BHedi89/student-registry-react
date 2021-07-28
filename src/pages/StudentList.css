@@ -1,0 +1,19 @@
+.table {
+    background: #A7766F;
+    color: #1F1513;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.table-container {
+    margin-left: 300px;
+    margin-right: 100px;
+    flex-grow: 1;
+}

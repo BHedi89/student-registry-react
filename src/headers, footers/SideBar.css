@@ -1,0 +1,74 @@
+#header {
+    position: fixed;
+    width: 200px;
+}
+
+#header .pro-sidebar {
+  height: 100vh;
+}
+
+#header .pro-sidebar {
+    width: 100%;
+    min-width: 100%;
+}
+
+#header .pro-sidebar.collapsed {
+    width: 80px;
+    min-width: 80px;
+}
+
+#header .pro-sidebar-inner {
+    background-color: #683C31;
+    box-shadow: 0.5px 0.866px 2px 0px rgba(0, 0, 0, 0.15);
+}
+
+#header .pro-sidebar-inner .pro-sidebar-layout {
+    overflow-y: hidden;
+}
+
+#header .pro-sidebar-inner .pro-sidebar-layout .closemenu p {
+    font-size: 20px;
+    padding: 0 20px;
+    color: #E5E3D6;
+    font-weight: bold;
+}
+
+#header .pro-sidebar-inner .pro-sidebar-layout ul {
+    padding: 0 5px;
+}
+
+#header .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item {
+    color: #E5E3D6;
+    margin: 10px 0px;
+    font-weight: bold;
+}
+
+#header .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item .pro-icon-wrapper {
+    background-color: #D2B2A7;
+    color: #000;
+    border-radius: 3px;
+}
+
+#header .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item .pro-icon-wrapper .pro-item-content {
+    color: #000;
+}
+
+#header .pro-sidebar-inner .pro-sidebar-layout .active {
+    background-image: linear-gradient(0deg, #452F22 0%, #D2B2A7 100%);
+}
+
+#header .logo {
+    padding: 20px;
+}
+
+@media only screen and (max-width: 720px) {
+    html {
+        overflow: hidden;
+    }
+}
+
+.icon {
+    font-size: 25px;
+    color: #E5E3D6;
+    margin: 20px;
+}

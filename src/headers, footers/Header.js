@@ -1,5 +1,7 @@
+import { Button } from "react-bootstrap";
 import { Component } from "react";
 import { Link } from "react-router-dom";
+import classes from "./Header.module.css";
 
 
 class Header extends Component {
@@ -17,9 +19,9 @@ class Header extends Component {
                 <div className="col">
                 <div className="float-right">
                 <Link to={this.props.buttonLink}>
-                    <button type="button" className="btn btn-success my-2 my-sm-0">
+                    <Button className={classes.button}>
                         {this.props.buttonTitle}
-                    </button>
+                    </Button>
                 </Link>
                 </div>
                 </div>

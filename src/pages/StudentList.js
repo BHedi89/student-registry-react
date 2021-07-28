@@ -4,7 +4,8 @@ import StudentRow from "./StudentRow";
 import Filter from "../filter/Filter";
 import { getAllStudent } from "../http/studentService";
 import { Table } from "react-bootstrap";
-
+import "./StudentList.css";
+import SideBar from "../headers, footers/SideBar";
 
 class StudentList extends Component {
   constructor(props) {
@@ -17,19 +18,18 @@ class StudentList extends Component {
 
   componentDidMount() {
     const studentsList = [];
-    getAllStudent()
-      .then((students) => {
-        for (const key in students) {
-          const studentObj = {
-            id: key,
-            ...students[key],
-          };
-          studentsList.push(studentObj);
-        }
-        this.setState({
-          students: studentsList,
-        });
+    getAllStudent().then((students) => {
+      for (const key in students) {
+        const studentObj = {
+          id: key,
+          ...students[key],
+        };
+        studentsList.push(studentObj);
+      }
+      this.setState({
+        students: studentsList,
       });
+    });
   }
 
   updateStudent = (id, student) => {
@@ -51,56 +51,65 @@ class StudentList extends Component {
   };
 
   handleChange = (e) => {
-    this.setState({filter: e.target.value})
-  }
+    this.setState({ filter: e.target.value });
+  };
 
   render() {
     return (
-      <div className="container">
-        <Header
-          title="Hallgatói nyilvántartás"
-          buttonTitle="Hozzáadás"
-          buttonLink="/addStudent"
-        />
-        <Filter handleChange={this.handleChange} />
-        <Table striped bordered hover variant="dark">
-          <thead>
-            <tr>
-              <th scope="col">Név</th>
-              <th scope="col">E-mail cím</th>
-              <th scope="col">Életkor</th>
-              <th scope="col">Nem</th>
-              <th scope="col">Könyvek száma</th>
-              <th scope="col">Módosítás/Törlés</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.students.length !== 0 ? (
-              <StudentRow
-                students={this.state.students.filter((filteredStudent) => {
-                  if (this.state.filter === "") {
-                    return filteredStudent;
-                  } else if (filteredStudent.name.toLowerCase().includes(this.state.filter.toLowerCase())){
-                    return filteredStudent;
-                  } else {
-                    return "";
-                  }
-                })}
-                onStudentUpdate={this.updateStudent}
-                onUpdateAfterDelete={this.updateAfterDelete}
-              />
-            ) : (
+      <div className="flex-container">
+        <div className="sidebar">
+          <SideBar />
+        </div>
+        <div className="table-container">
+          <Header
+            title="Hallgatói nyilvántartás"
+            buttonTitle="Hozzáadás"
+            buttonLink="/addStudent"
+          />
+          <Filter handleChange={this.handleChange} />
+          <Table striped bordered hover className="table">
+            <thead>
               <tr>
-                <td>Nincs hallgató az adatbázisban!</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <th scope="col">Név</th>
+                <th scope="col">E-mail cím</th>
+                <th scope="col">Életkor</th>
+                <th scope="col">Nem</th>
+                <th scope="col">Könyvek száma</th>
+                <th scope="col">Módosítás/Törlés</th>
               </tr>
-            )}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {this.state.students.length !== 0 ? (
+                <StudentRow
+                  students={this.state.students.filter((filteredStudent) => {
+                    if (this.state.filter === "") {
+                      return filteredStudent;
+                    } else if (
+                      filteredStudent.name
+                        .toLowerCase()
+                        .includes(this.state.filter.toLowerCase())
+                    ) {
+                      return filteredStudent;
+                    } else {
+                      return "";
+                    }
+                  })}
+                  onStudentUpdate={this.updateStudent}
+                  onUpdateAfterDelete={this.updateAfterDelete}
+                />
+              ) : (
+                <tr>
+                  <td>Nincs hallgató az adatbázisban!</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              )}
+            </tbody>
+          </Table>
+        </div>
       </div>
     );
   }

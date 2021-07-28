@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
+import classes from "./StudentRow.module.css";
 
 class StudentRow extends Component {
   constructor(props) {
@@ -45,7 +46,7 @@ class StudentRow extends Component {
               <td>{student.gender === "FEMALE" ? "nő" : "férfi"}</td>
               <td>
                 {booksNum === 0 ? (
-                  <Link
+                  <Link className={classes.link}
                     to={{
                       pathname: `/studentBooks/${student.id}`,
                       state: student,
@@ -54,7 +55,7 @@ class StudentRow extends Component {
                     Nincs
                   </Link>
                 ) : (
-                  <Link
+                  <Link className={classes.link}
                     to={{
                       pathname: `/studentBooks/${student.id}`,
                       state: student,
