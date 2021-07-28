@@ -1,9 +1,10 @@
 import { Component } from "react";
-import { Form, Col, Button, Alert } from "react-bootstrap";
+import { Form, Col, Alert } from "react-bootstrap";
 import { FormErrors } from "../error/FormErrors";
 import classes from "./NewBookForm.module.css";
 import { addNewBook, Book } from "../http/bookService";
 import { getSingleStudent } from "../http/studentService";
+import Button from "../UI/Button";
 
 class NewBookForm extends Component {
   constructor(props) {
@@ -358,12 +359,9 @@ class NewBookForm extends Component {
             </Form.Group>
           </Form.Row>
           <Button
-            className="btn btn-primary mb-5"
-            type="submit"
+            buttonText="Mentés"
             disabled={!this.state.formValid}
-          >
-            Mentés
-          </Button>
+          />
         </Form>
       </>
     );

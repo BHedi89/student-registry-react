@@ -4,6 +4,9 @@ import NewBookForm from "../forms/NewBookForm";
 import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { getSingleStudent } from "../http/studentService";
+import SideBar from "../headers, footers/SideBar";
+import classes from "./StudentBooks.module.css";
+import Button from "../UI/Button";
 
 class StudentBooks extends Component {
   constructor(props) {
@@ -16,16 +19,15 @@ class StudentBooks extends Component {
 
   componentDidMount() {
     const studentId = this.props.location.state.id;
-    getSingleStudent(studentId)
-      .then((studentData) => {
-        this.setState({
-          student: studentData,
-        });
+    getSingleStudent(studentId).then((studentData) => {
+      this.setState({
+        student: studentData,
       });
+    });
   }
 
   updateStudentBooks = (updatedStudentData) => {
-    let modifiedStudentBook = { ...this.state.student};
+    let modifiedStudentBook = { ...this.state.student };
     modifiedStudentBook = updatedStudentData;
     this.setState({
       student: modifiedStudentBook,
@@ -48,6 +50,7 @@ class StudentBooks extends Component {
           <td>{this.state.student.books[key].subtitle}</td>
           <td>
             <Link
+              className={classes.link}
               to={{
                 pathname: this.state.student.books[key].website,
               }}
@@ -60,36 +63,39 @@ class StudentBooks extends Component {
       );
     }
     return (
-      <div className="container">
-        <Header
-          buttonLink="/studentList"
-          buttonTitle="Vissza"
-          title={`${this.state.student.name} könyvei`}
-        />
-        <button
-          className="btn btn-primary mb-3"
-          onClick={() => this.toggleForm()}
-        >
-          Új könyv hozzáadása
-        </button>
-        {this.state.showForm ? (
-          <NewBookForm
-            studentId={this.props.location.state.id}
-            studentData={this.state.student}
-            onUpdateStudentsBook={this.updateStudentBooks}
+      <div className={classes.flexcontainer}>
+        <div className={classes.sidebar}>
+          <SideBar />
+        </div>
+        <div className={classes.tablecontainer}>
+          <Header
+            buttonLink="/studentList"
+            buttonTitle="Vissza"
+            title={`${this.state.student.name} könyvei`}
           />
-        ) : null}
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>Szerző</th>
-              <th>Cím</th>
-              <th>Alcím</th>
-              <th>Weboldal</th>
-            </tr>
-          </thead>
-          <tbody>{books}</tbody>
-        </Table>
+          <Button
+            buttonText="Új könyv hozzáadása"
+            onClick={() => this.toggleForm()}
+          />
+          {this.state.showForm ? (
+            <NewBookForm
+              studentId={this.props.location.state.id}
+              studentData={this.state.student}
+              onUpdateStudentsBook={this.updateStudentBooks}
+            />
+          ) : null}
+          <Table striped bordered hover className={classes.table}>
+            <thead>
+              <tr>
+                <th>Szerző</th>
+                <th>Cím</th>
+                <th>Alcím</th>
+                <th>Weboldal</th>
+              </tr>
+            </thead>
+            <tbody>{books}</tbody>
+          </Table>
+        </div>
       </div>
     );
   }

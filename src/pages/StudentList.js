@@ -4,7 +4,7 @@ import StudentRow from "./StudentRow";
 import Filter from "../filter/Filter";
 import { getAllStudent } from "../http/studentService";
 import { Table } from "react-bootstrap";
-import "./StudentList.css";
+import classes from "./StudentList.module.css";
 import SideBar from "../headers, footers/SideBar";
 
 class StudentList extends Component {
@@ -56,18 +56,18 @@ class StudentList extends Component {
 
   render() {
     return (
-      <div className="flex-container">
-        <div className="sidebar">
+      <div className={classes.flexcontainer}>
+        <div className={classes.sidebar}>
           <SideBar />
         </div>
-        <div className="table-container">
+        <div className={classes.tablecontainer}>
           <Header
             title="Hallgatói nyilvántartás"
             buttonTitle="Hozzáadás"
             buttonLink="/addStudent"
           />
           <Filter handleChange={this.handleChange} />
-          <Table striped bordered hover className="table">
+          <Table striped bordered hover className={classes.table}>
             <thead>
               <tr>
                 <th scope="col">Név</th>

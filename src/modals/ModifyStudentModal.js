@@ -1,7 +1,8 @@
 import React from "react";
 import { Component } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { modifyStudent, Student } from "../http/studentService";
+import Button from "../UI/Button";
 
 class ModifyStudentModal extends Component {
   constructor(props) {
@@ -114,13 +115,9 @@ class ModifyStudentModal extends Component {
           </Form.Group>
         </Form>
         <Button
-          className="btn btn-primary"
+          buttonText="Mentés"
           onClick={this.handleSubmit}
-          type="button"
-          block
-        >
-          Mentés
-        </Button>
+        />
       </>
     );
   }

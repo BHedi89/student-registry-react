@@ -1,9 +1,10 @@
 import { Component } from "react";
-import { Form, Alert, Button } from "react-bootstrap";
+import { Form, Alert } from "react-bootstrap";
 import Header from "../headers, footers/Header";
 import classes from "./AddStudentForm.module.css";
 import { FormErrors } from "../error/FormErrors";
 import { addNewStudent, Student } from "../http/studentService";
+import Button from "../UI/Button";
 
 class AddStudentForm extends Component {
   constructor(props) {
@@ -202,12 +203,9 @@ class AddStudentForm extends Component {
           </Form.Group>
           <div>
             <Button
-              className="btn btn-primary"
-              type="submit"
+              buttonText="Mentés"
               disabled={!this.state.formValid}
-            >
-              Mentés
-            </Button>
+            /> 
           </div>
         </Form>
       </div>

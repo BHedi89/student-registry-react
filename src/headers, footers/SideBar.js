@@ -7,7 +7,7 @@ import {
   SidebarContent,
 } from "react-pro-sidebar";
 import { FaList, FaRegHeart } from "react-icons/fa";
-import { FiHome, FiLogOut } from "react-icons/fi";
+import { FiHome, FiLogOut, FiLogIn } from "react-icons/fi";
 import { RiPencilLine } from "react-icons/ri";
 import { BiCog } from "react-icons/bi";
 import "react-pro-sidebar/dist/css/styles.css";
@@ -48,9 +48,9 @@ class SideBar extends Component {
             <SidebarContent>
               <Menu iconShape="square">
                 <MenuItem active={true} icon={<FiHome />}>
-                  Home
+                  Hallgatók
                 </MenuItem>
-                <MenuItem icon={<FaList />}>Category</MenuItem>
+                <MenuItem icon={<FaList />}>Új hallgató</MenuItem>
                 <MenuItem icon={<FaRegHeart />}>Favourite</MenuItem>
                 <MenuItem icon={<RiPencilLine />}>Author</MenuItem>
                 <MenuItem icon={<BiCog />}>Settings</MenuItem>
@@ -58,7 +58,8 @@ class SideBar extends Component {
             </SidebarContent>
             <SidebarFooter>
               <Menu iconShape="square">
-                <MenuItem icon={<FiLogOut />}>Logout</MenuItem>
+                <MenuItem icon={<FiLogIn />}>Bejelentkezés</MenuItem>
+                <MenuItem icon={<FiLogOut />}>Kijelentkezés</MenuItem>
               </Menu>
             </SidebarFooter>
           </ProSidebar>

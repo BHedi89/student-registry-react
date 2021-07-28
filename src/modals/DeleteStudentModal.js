@@ -1,6 +1,7 @@
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import { Component } from "react";
 import { deleteStudent } from "../http/studentService";
+import Button from "../UI/Button";
 
 class DeleteStudentModal extends Component {
   handleSubmit = () => {
@@ -20,12 +21,8 @@ class DeleteStudentModal extends Component {
           Biztosan végleg törölni akarja a tanuló adatait?
         </Modal.Body>
         <Modal.Footer>
-          <Button className="btn btn-secondary" onClick={this.props.closeModal}>
-            Mégsem
-          </Button>
-          <Button className="btn btn-danger" onClick={this.handleSubmit}>
-            Törlés
-          </Button>
+          <Button buttonText="Mégsem" onClick={this.props.closeModal} />
+          <Button buttonText="Törlés" onClick={this.handleSubmit} />
         </Modal.Footer>
       </>
     );
