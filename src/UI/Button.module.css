@@ -5,15 +5,10 @@
     color: #E5E3D6;
 }
 
-.button:hover {
+.button:hover,
+.button:active{
     background-color: #805850;
     border-color: #805850;
     color: #E5E3D6;
-    box-shadow: none;
-}
-
-.button:active {
-    background-color: #683C31;
-    border-color: #683C31;
     box-shadow: none;
 }

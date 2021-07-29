@@ -1,16 +1,6 @@
-.flexcontainer {
-    display: flex;
-}
-
 .table {
     background: #A7766F;
     color: #1F1513;
-}
-
-.tablecontainer {
-    margin-left: 310px;
-    margin-right: 100px;
-    flex-grow: 1;
 }
 
 .link {

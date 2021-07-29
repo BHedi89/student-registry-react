@@ -2,13 +2,3 @@
     background: #A7766F;
     color: #1F1513;
 }
-
-.flexcontainer {
-    display: flex;
-}
-
-.tablecontainer {
-    margin-left: 310px;
-    margin-right: 100px;
-    flex-grow: 1;
-}

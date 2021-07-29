@@ -1,11 +1,11 @@
 import { Component } from "react";
-import Header from "../headers, footers/Header";
+import Header from "../layout/Header";
 import StudentRow from "./StudentRow";
 import Filter from "../filter/Filter";
 import { getAllStudent } from "../http/studentService";
 import { Table } from "react-bootstrap";
 import classes from "./StudentList.module.css";
-import SideBar from "../headers, footers/SideBar";
+import SideBar from "../layout/SideBar";
 
 class StudentList extends Component {
   constructor(props) {
@@ -56,61 +56,56 @@ class StudentList extends Component {
 
   render() {
     return (
-      <div className={classes.flexcontainer}>
-        <div className={classes.sidebar}>
-          <SideBar />
-        </div>
-        <div className={classes.tablecontainer}>
-          <Header
-            title="Hallgatói nyilvántartás"
-            buttonTitle="Hozzáadás"
-            buttonLink="/addStudent"
-          />
-          <Filter handleChange={this.handleChange} />
-          <Table striped bordered hover className={classes.table}>
-            <thead>
+      <>
+        <Header
+          title="Hallgatói nyilvántartás"
+          buttonTitle="Hozzáadás"
+          buttonLink="/addStudent"
+        />
+        <Filter handleChange={this.handleChange} />
+        <Table striped bordered hover className={classes.table}>
+          <thead>
+            <tr>
+              <th scope="col">Név</th>
+              <th scope="col">E-mail cím</th>
+              <th scope="col">Életkor</th>
+              <th scope="col">Nem</th>
+              <th scope="col">Könyvek száma</th>
+              <th scope="col">Módosítás/Törlés</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.students.length !== 0 ? (
+              <StudentRow
+                students={this.state.students.filter((filteredStudent) => {
+                  if (this.state.filter === "") {
+                    return filteredStudent;
+                  } else if (
+                    filteredStudent.name
+                      .toLowerCase()
+                      .includes(this.state.filter.toLowerCase())
+                  ) {
+                    return filteredStudent;
+                  } else {
+                    return "";
+                  }
+                })}
+                onStudentUpdate={this.updateStudent}
+                onUpdateAfterDelete={this.updateAfterDelete}
+              />
+            ) : (
               <tr>
-                <th scope="col">Név</th>
-                <th scope="col">E-mail cím</th>
-                <th scope="col">Életkor</th>
-                <th scope="col">Nem</th>
-                <th scope="col">Könyvek száma</th>
-                <th scope="col">Módosítás/Törlés</th>
+                <td>Nincs hallgató az adatbázisban!</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
               </tr>
-            </thead>
-            <tbody>
-              {this.state.students.length !== 0 ? (
-                <StudentRow
-                  students={this.state.students.filter((filteredStudent) => {
-                    if (this.state.filter === "") {
-                      return filteredStudent;
-                    } else if (
-                      filteredStudent.name
-                        .toLowerCase()
-                        .includes(this.state.filter.toLowerCase())
-                    ) {
-                      return filteredStudent;
-                    } else {
-                      return "";
-                    }
-                  })}
-                  onStudentUpdate={this.updateStudent}
-                  onUpdateAfterDelete={this.updateAfterDelete}
-                />
-              ) : (
-                <tr>
-                  <td>Nincs hallgató az adatbázisban!</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              )}
-            </tbody>
-          </Table>
-        </div>
-      </div>
+            )}
+          </tbody>
+        </Table>
+      </>
     );
   }
 }

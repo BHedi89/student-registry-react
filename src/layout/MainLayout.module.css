@@ -1,0 +1,9 @@
+.flexcontainer {
+    display: flex;
+}
+
+.maincontent {
+    margin-left: 310px;
+    margin-right: 100px;
+    flex-grow: 1;
+}

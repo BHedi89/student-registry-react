@@ -1,10 +1,10 @@
 import { Component } from "react";
-import Header from "../headers, footers/Header";
+import Header from "../layout/Header";
 import NewBookForm from "../forms/NewBookForm";
 import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { getSingleStudent } from "../http/studentService";
-import SideBar from "../headers, footers/SideBar";
+import SideBar from "../layout/SideBar";
 import classes from "./StudentBooks.module.css";
 import Button from "../UI/Button";
 
@@ -18,6 +18,7 @@ class StudentBooks extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props)
     const studentId = this.props.location.state.id;
     getSingleStudent(studentId).then((studentData) => {
       this.setState({
@@ -63,11 +64,7 @@ class StudentBooks extends Component {
       );
     }
     return (
-      <div className={classes.flexcontainer}>
-        <div className={classes.sidebar}>
-          <SideBar />
-        </div>
-        <div className={classes.tablecontainer}>
+        <>
           <Header
             buttonLink="/studentList"
             buttonTitle="Vissza"
@@ -95,8 +92,7 @@ class StudentBooks extends Component {
             </thead>
             <tbody>{books}</tbody>
           </Table>
-        </div>
-      </div>
+        </>
     );
   }
 }
