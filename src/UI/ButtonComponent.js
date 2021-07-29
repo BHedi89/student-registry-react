@@ -11,7 +11,8 @@ class ButtonComponent extends Component {
   render() {
     return (
       <Button
-        className={`${classes.button} mb-3 btn`}
+        variant="none"
+        className={`${classes.button} mb-3`}
         onClick={this.props.onClick}
         disabled={this.props.disabled}
       >
