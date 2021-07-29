@@ -12,3 +12,10 @@
     color: #E5E3D6;
     box-shadow: none;
 }
+
+.button:disabled {
+    background-color: #683C31;
+    border-color: #683C31;
+    box-shadow: none;
+    color: #E5E3D6;
+}

@@ -4,7 +4,7 @@ import Header from "../layout/Header";
 import classes from "./AddStudentForm.module.css";
 import { FormErrors } from "../error/FormErrors";
 import { addNewStudent, Student } from "../http/studentService";
-import Button from "../UI/Button";
+import ButtonComponent from "../UI/ButtonComponent";
 
 class AddStudentForm extends Component {
   constructor(props) {
@@ -202,7 +202,7 @@ class AddStudentForm extends Component {
             </Form.Control>
           </Form.Group>
           <div>
-            <Button
+            <ButtonComponent
               buttonText="Mentés"
               disabled={!this.state.formValid}
             /> 
