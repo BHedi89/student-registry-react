@@ -2,7 +2,7 @@ import { Component } from "react";
 import Header from "../layout/Header";
 import NewBookForm from "../forms/NewBookForm";
 import { getSingleStudent } from "../http/studentService";
-import Button from "../UI/Button";
+import ButtonComponent from "../UI/ButtonComponent";
 import LinkComponent from "../UI/LinkComponent";
 import TableComponent from "../UI/TableComponent";
 
@@ -65,7 +65,7 @@ class StudentBooks extends Component {
           buttonTitle="Vissza"
           title={`${this.state.student.name} könyvei`}
         />
-        <Button
+        <ButtonComponent
           buttonText="Új könyv hozzáadása"
           onClick={() => this.toggleForm()}
         />

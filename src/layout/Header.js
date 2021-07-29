@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
-import Button from "../UI/Button";
+import ButtonComponent from "../UI/ButtonComponent";
 
 
 class Header extends Component {
@@ -18,7 +18,7 @@ class Header extends Component {
                 <div className="col">
                 <div className="float-right">
                 <Link to={this.props.buttonLink}>
-                    <Button buttonText={this.props.buttonTitle} />
+                    <ButtonComponent buttonText={this.props.buttonTitle} />
                 </Link>
                 </div>
                 </div>

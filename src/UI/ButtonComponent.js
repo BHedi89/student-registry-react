@@ -1,7 +1,8 @@
+import { Button } from "react-bootstrap";
 import { Component } from "react";
-import classes from "./Button.module.css";
+import classes from "./ButtonComponent.module.css";
 
-class ButtonStyle extends Component {
+class ButtonComponent extends Component {
   constructor(props) {
     super(props);
     this.buttonText = "";
@@ -9,15 +10,15 @@ class ButtonStyle extends Component {
 
   render() {
     return (
-      <button
+      <Button
         className={`${classes.button} mb-3 btn`}
         onClick={this.props.onClick}
         disabled={this.props.disabled}
       >
         {this.props.buttonText}
-      </button>
+      </Button>
     );
   }
 }
 
-export default ButtonStyle;
+export default ButtonComponent;

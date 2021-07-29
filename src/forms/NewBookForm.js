@@ -4,7 +4,7 @@ import { FormErrors } from "../error/FormErrors";
 import classes from "./NewBookForm.module.css";
 import { addNewBook, Book } from "../http/bookService";
 import { getSingleStudent } from "../http/studentService";
-import Button from "../UI/Button";
+import ButtonComponent from "../UI/ButtonComponent";
 
 class NewBookForm extends Component {
   constructor(props) {
@@ -358,7 +358,7 @@ class NewBookForm extends Component {
               />
             </Form.Group>
           </Form.Row>
-          <Button
+          <ButtonComponent
             buttonText="Mentés"
             disabled={!this.state.formValid}
           />

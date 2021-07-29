@@ -2,7 +2,7 @@ import React from "react";
 import { Component } from "react";
 import { Form } from "react-bootstrap";
 import { modifyStudent, Student } from "../http/studentService";
-import Button from "../UI/Button";
+import ButtonComponent from "../UI/ButtonComponent";
 
 class ModifyStudentModal extends Component {
   constructor(props) {
@@ -114,7 +114,7 @@ class ModifyStudentModal extends Component {
             </Form.Control.Feedback>
           </Form.Group>
         </Form>
-        <Button
+        <ButtonComponent
           buttonText="Mentés"
           onClick={this.handleSubmit}
         />
