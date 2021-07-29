@@ -5,7 +5,6 @@ import Filter from "../filter/Filter";
 import { getAllStudent } from "../http/studentService";
 import { Table } from "react-bootstrap";
 import classes from "./StudentList.module.css";
-import SideBar from "../layout/SideBar";
 
 class StudentList extends Component {
   constructor(props) {

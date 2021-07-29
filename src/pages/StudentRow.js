@@ -2,11 +2,10 @@ import React, { Component, Fragment } from "react";
 import ModifyStudentModal from "../modals/ModifyStudentModal";
 import { Modal } from "react-bootstrap";
 import DeleteStudentModal from "../modals/DeleteStudentModal";
-import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
-import classes from "./StudentRow.module.css";
+import LinkComponent from "../UI/LinkComponent";
 
 class StudentRow extends Component {
   constructor(props) {
@@ -46,23 +45,21 @@ class StudentRow extends Component {
               <td>{student.gender === "FEMALE" ? "nő" : "férfi"}</td>
               <td>
                 {booksNum === 0 ? (
-                  <Link className={classes.link}
+                  <LinkComponent
                     to={{
                       pathname: `/studentBooks/${student.id}`,
                       state: student,
                     }}
-                  >
-                    Nincs
-                  </Link>
+                    linkText="Nincs"
+                  />
                 ) : (
-                  <Link className={classes.link}
+                  <LinkComponent
                     to={{
                       pathname: `/studentBooks/${student.id}`,
                       state: student,
                     }}
-                  >
-                    {booksNum}
-                  </Link>
+                    linkText={booksNum}
+                  />
                 )}
               </td>
               <td>
