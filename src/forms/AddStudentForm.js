@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Form, Alert } from "react-bootstrap";
 import Header from "../layout/Header";
-import classes from "./AddStudentForm.module.css";
+import classes from "./FormValidation.module.css";
 import { FormErrors } from "../error/FormErrors";
 import { addNewStudent, Student } from "../http/studentService";
 import ButtonComponent from "../UI/ButtonComponent";
