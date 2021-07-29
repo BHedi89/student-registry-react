@@ -3,8 +3,7 @@ import Header from "../layout/Header";
 import StudentRow from "./StudentRow";
 import Filter from "../filter/Filter";
 import { getAllStudent } from "../http/studentService";
-import { Table } from "react-bootstrap";
-import classes from "./StudentList.module.css";
+import TableComponent from "../UI/TableComponent";
 
 class StudentList extends Component {
   constructor(props) {
@@ -62,7 +61,7 @@ class StudentList extends Component {
           buttonLink="/addStudent"
         />
         <Filter handleChange={this.handleChange} />
-        <Table striped bordered hover className={classes.table}>
+        <TableComponent>
           <thead>
             <tr>
               <th scope="col">Név</th>
@@ -103,7 +102,7 @@ class StudentList extends Component {
               </tr>
             )}
           </tbody>
-        </Table>
+        </TableComponent>
       </>
     );
   }

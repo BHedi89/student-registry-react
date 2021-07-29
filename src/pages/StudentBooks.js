@@ -1,11 +1,10 @@
 import { Component } from "react";
 import Header from "../layout/Header";
 import NewBookForm from "../forms/NewBookForm";
-import { Table } from "react-bootstrap";
 import { getSingleStudent } from "../http/studentService";
-import classes from "./StudentBooks.module.css";
 import Button from "../UI/Button";
 import LinkComponent from "../UI/LinkComponent";
+import TableComponent from "../UI/TableComponent";
 
 class StudentBooks extends Component {
   constructor(props) {
@@ -17,7 +16,6 @@ class StudentBooks extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
     const studentId = this.props.location.state.id;
     getSingleStudent(studentId).then((studentData) => {
       this.setState({
@@ -78,7 +76,7 @@ class StudentBooks extends Component {
             onUpdateStudentsBook={this.updateStudentBooks}
           />
         ) : null}
-        <Table striped bordered hover className={classes.table}>
+        <TableComponent>
           <thead>
             <tr>
               <th>Szerző</th>
@@ -88,7 +86,7 @@ class StudentBooks extends Component {
             </tr>
           </thead>
           <tbody>{books}</tbody>
-        </Table>
+        </TableComponent>
       </>
     );
   }
