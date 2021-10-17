@@ -11,62 +11,54 @@ import { FiHome, FiLogOut, FiLogIn } from "react-icons/fi";
 import { RiPencilLine } from "react-icons/ri";
 import { BiCog } from "react-icons/bi";
 import "react-pro-sidebar/dist/css/styles.css";
-import { Component } from "react";
 import "./SideBar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
-class SideBar extends Component {
-  constructor() {
-    super();
-    this.state = {
-      menuCollapse: false,
-    };
-  }
+const SideBar = () => {
+  const [isMenuCollapse, setMenuCollapse] = useState(false);
 
-  menuIconClick = () => {
-    this.state.menuCollapse
-      ? this.setState({ menuCollapse: false })
-      : this.setState({ menuCollapse: true });
+  const menuIconClick = () => {
+    isMenuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
   };
-
-  render() {
-    return (
-      <>
-        <div id="header">
-          <ProSidebar collapsed={this.state.menuCollapse}>
-            <SidebarHeader>
-              <div className="closemenu" onClick={this.menuIconClick}>
-                {this.state.menuCollapse ? (
-                  <FontAwesomeIcon icon={faBars} className="icon" />
-                ) : (
-                  <FontAwesomeIcon icon={faTimes} className="icon" />
-                )}
-              </div>
-            </SidebarHeader>
-            <SidebarContent>
-              <Menu iconShape="square">
-                <MenuItem active={true} icon={<FiHome />}>
-                  Hallgatók
-                </MenuItem>
-                <MenuItem icon={<FaList />}>Új hallgató</MenuItem>
-                <MenuItem icon={<FaRegHeart />}>Favourite</MenuItem>
-                <MenuItem icon={<RiPencilLine />}>Author</MenuItem>
-                <MenuItem icon={<BiCog />}>Settings</MenuItem>
-              </Menu>
-            </SidebarContent>
-            <SidebarFooter>
-              <Menu iconShape="square">
-                <MenuItem icon={<FiLogIn />}>Bejelentkezés</MenuItem>
-                <MenuItem icon={<FiLogOut />}>Kijelentkezés</MenuItem>
-              </Menu>
-            </SidebarFooter>
-          </ProSidebar>
-        </div>
-      </>
-    );
-  }
+  
+  return (
+    <>
+      <div id="header">
+        <ProSidebar collapsed={isMenuCollapse}>
+          <SidebarHeader>
+            <div className="closemenu" onClick={menuIconClick}>
+              {isMenuCollapse ? (
+                <FontAwesomeIcon icon={faBars} className="icon" />
+              ) : (
+                <FontAwesomeIcon icon={faTimes} className="icon" />
+              )}
+            </div>
+          </SidebarHeader>
+          <SidebarContent>
+            <Menu iconShape="square">
+              <MenuItem active={true} icon={<FiHome />}>
+                Hallgatók
+              </MenuItem>
+              <MenuItem icon={<FaList />}>Új hallgató</MenuItem>
+              <MenuItem icon={<FaRegHeart />}>Favourite</MenuItem>
+              <MenuItem icon={<RiPencilLine />}>Author</MenuItem>
+              <MenuItem icon={<BiCog />}>Settings</MenuItem>
+            </Menu>
+          </SidebarContent>
+          <SidebarFooter>
+            <Menu iconShape="square">
+              <MenuItem icon={<FiLogIn />}>Bejelentkezés</MenuItem>
+              <MenuItem icon={<FiLogOut />}>Kijelentkezés</MenuItem>
+            </Menu>
+          </SidebarFooter>
+        </ProSidebar>
+      </div>
+    </>
+  );
+  
 }
 
 export default SideBar;
