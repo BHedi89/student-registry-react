@@ -1,95 +1,89 @@
-import { Component } from "react";
 import Header from "../layout/Header";
 import NewBookForm from "../forms/NewBookForm";
-import { getSingleStudent } from "../http/studentService";
+import { getSingleStudent, controller } from "../http/studentService";
 import ButtonComponent from "../UI/ButtonComponent";
 import LinkComponent from "../UI/LinkComponent";
 import TableComponent from "../UI/TableComponent";
+import { useState, useEffect } from "react";
 
-class StudentBooks extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showForm: false,
-      student: [],
-    };
-  }
+const StudentBooks = props => { 
+  const [showForm, setShowForm] = useState(false);
+  const [student, setStudent] = useState([]);
 
-  componentDidMount() {
-    const studentId = this.props.location.state.id;
+  useEffect(() => {
+    let isApiSubscribed = true;
+    const studentId = props.location.state.id;
     getSingleStudent(studentId).then((studentData) => {
-      this.setState({
-        student: studentData,
-      });
+      if(isApiSubscribed) {
+        setStudent(studentData);
+      }
     });
-  }
+    return () => {
+      // cleanup
+      isApiSubscribed = false;
+    }
+  }, [])
 
-  updateStudentBooks = (updatedStudentData) => {
-    let modifiedStudentBook = { ...this.state.student };
+  const updateStudentBooks = (updatedStudentData) => {
+    let modifiedStudentBook = { ...student };
     modifiedStudentBook = updatedStudentData;
-    this.setState({
-      student: modifiedStudentBook,
-    });
+    setStudent(modifiedStudentBook);
   };
 
-  toggleForm() {
-    this.setState({
-      showForm: !this.state.showForm,
-    });
+  function toggleForm() {
+    setShowForm(!showForm);
   }
-
-  render() {
-    const books = [];
-    for (const key in this.state.student.books) {
-      books.push(
-        <tr key={this.state.student.books[key].isbn}>
-          <td>{this.state.student.books[key].author}</td>
-          <td>{this.state.student.books[key].title}</td>
-          <td>{this.state.student.books[key].subtitle}</td>
-          <td>
-            <LinkComponent
-              to={{
-                pathname: this.state.student.books[key].website,
-              }}
-              target="_blank"
-              linkText={this.state.student.books[key].website}
-            />
-          </td>
-        </tr>
-      );
-    }
-    return (
-      <>
-        <Header
-          buttonLink="/studentList"
-          buttonTitle="Vissza"
-          title={`${this.state.student.name} könyvei`}
-        />
-        <ButtonComponent
-          buttonText="Új könyv hozzáadása"
-          onClick={() => this.toggleForm()}
-        />
-        {this.state.showForm ? (
-          <NewBookForm
-            studentId={this.props.location.state.id}
-            studentData={this.state.student}
-            onUpdateStudentsBook={this.updateStudentBooks}
+  
+  const books = [];
+  for (const key in student.books) {
+    books.push(
+      <tr key={student.books[key].isbn}>
+        <td>{student.books[key].author}</td>
+        <td>{student.books[key].title}</td>
+        <td>{student.books[key].subtitle}</td>
+        <td>
+          <LinkComponent
+            to={{
+              pathname: student.books[key].website,
+            }}
+            target="_blank"
+            linkText={student.books[key].website}
           />
-        ) : null}
-        <TableComponent>
-          <thead>
-            <tr>
-              <th>Szerző</th>
-              <th>Cím</th>
-              <th>Alcím</th>
-              <th>Weboldal</th>
-            </tr>
-          </thead>
-          <tbody>{books}</tbody>
-        </TableComponent>
-      </>
+        </td>
+      </tr>
     );
   }
+  return (
+    <>
+      <Header
+        buttonLink="/studentList"
+        buttonTitle="Vissza"
+        title={`${student.name} könyvei`}
+      />
+      <ButtonComponent
+        buttonText="Új könyv hozzáadása"
+        onClick={() => toggleForm()}
+      />
+      {showForm ? (
+        <NewBookForm
+          studentId={props.location.state.id}
+          studentData={student}
+          onUpdateStudentsBook={updateStudentBooks}
+        />
+      ) : null}
+      <TableComponent>
+        <thead>
+          <tr>
+            <th>Szerző</th>
+            <th>Cím</th>
+            <th>Alcím</th>
+            <th>Weboldal</th>
+          </tr>
+        </thead>
+        <tbody>{books}</tbody>
+      </TableComponent>
+    </>
+  );
 }
 
 export default StudentBooks;

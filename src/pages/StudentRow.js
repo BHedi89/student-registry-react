@@ -8,7 +8,6 @@ import { faPen } from "@fortawesome/free-solid-svg-icons";
 import LinkComponent from "../UI/LinkComponent";
 import { useState } from 'react';
 
-//??????????
 const StudentRow = props => {
   const [show, setShow] = useState(false);
   const [studentId, setStudentId] = useState(null);
