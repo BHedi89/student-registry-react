@@ -1,6 +1,6 @@
 import Header from "../layout/Header";
 import NewBookForm from "../forms/NewBookForm";
-import { getSingleStudent, controller } from "../http/studentService";
+import { getSingleStudent } from "../http/studentService";
 import ButtonComponent from "../UI/ButtonComponent";
 import LinkComponent from "../UI/LinkComponent";
 import TableComponent from "../UI/TableComponent";

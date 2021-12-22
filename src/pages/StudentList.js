@@ -1,7 +1,7 @@
 import Header from "../layout/Header";
 import StudentRow from "./StudentRow";
 import Filter from "../filter/Filter";
-import { getAllStudent, controller } from "../http/studentService";
+import { getAllStudent } from "../http/studentService";
 import TableComponent from "../UI/TableComponent";
 import { useState, useEffect } from "react";
 
