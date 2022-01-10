@@ -1,74 +1,86 @@
-import { Component } from "react";
 import { Form, Alert } from "react-bootstrap";
 import Header from "../layout/Header";
 import classes from "./FormValidation.module.css";
 import { FormErrors } from "../error/FormErrors";
 import { addNewStudent, Student } from "../http/studentService";
 import ButtonComponent from "../UI/ButtonComponent";
+import { useState } from "react";
 
-class AddStudentForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showAlert: false,
+const AddStudentForm = () => {
+  const [showAlert, setShowAlert] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
+  const [formErrors, setFormErrors] = useState({
+    formErrors: {
       name: "",
       email: "",
       age: "",
       gender: "",
-      formErrors: {
-        name: "",
-        email: "",
-        age: "",
-        gender: "",
-      },
-      nameValid: false,
-      emailValid: false,
-      ageValid: false,
-      genderValid: false,
-      formValid: false,
-    };
+    }
+  });
+  const [nameValid, setNameValid] = useState(false);
+  const [emailValid, setEmailValid] = useState(false);
+  const [ageValid, setAgeValid] = useState(false);
+  const [genderValid, setGenderValid] = useState(false);
+  const [formValid, setFormValid] = useState(false);
+
+  const handleNameChange = (e) => {
+    const fieldName = e.target.name;
+    const value = e.target.value;
+    validateField(fieldName, value);
+    setName(e.target.value);
   }
 
-  handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    this.setState(
-      {
-        [name]: value,
-      },
-      () => {
-        this.validateField(name, value);
-      }
-    );
-  };
+  const handleEmailChange = (e) => {
+    const fieldName = e.target.name;
+    const value = e.target.value;
+    validateField(fieldName, value);
+    setEmail(e.target.value);
+  }
 
-  validateField(fieldName, value) {
-    let fieldValidationErrors = this.state.formErrors;
-    let nameValid = this.state.nameValid;
-    let emailValid = this.state.emailValid;
-    let ageValid = this.state.ageValid;
-    let genderValid = this.state.genderValid;
+  const handleAgeChange = (e) => {
+    const fieldName = e.target.name;
+    const value = e.target.value;
+    validateField(fieldName, value);
+    setAge(e.target.value);
+  }
+
+  const handleGenderChange = (e) => {
+    const fieldName = e.target.name;
+    const value = e.target.value;
+    validateField(fieldName, value);
+    setGender(e.target.value);
+  }
+
+  const validateField = (fieldName, value) => {
+    let fieldValidationErrors = formErrors;
+    let validName = nameValid;
+    let validEmail = emailValid;
+    let validAge = ageValid;
+    let validGender = genderValid;
 
     switch (fieldName) {
       case "name":
-        nameValid = value !== "";
-        fieldValidationErrors.name = nameValid ? "" : "Név megadása kötelező!";
+        validName = value !== "";
+        fieldValidationErrors.name = validName ? "" : "Név megadása kötelező!";
         break;
       case "email":
-        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-        fieldValidationErrors.email = emailValid
+        validEmail = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+        fieldValidationErrors.email = validEmail
           ? ""
           : "Email formátuma nem megfelelő!";
         break;
       case "age":
-        ageValid = value >= 18;
-        fieldValidationErrors.age = ageValid
+        validAge = value >= 18;
+        fieldValidationErrors.age = validAge
           ? ""
           : "Az életkor nem lehet kisebb, mint 18!";
         break;
       case "gender":
-        genderValid = value !== "";
-        fieldValidationErrors.gender = genderValid
+        validGender = value !== "";
+        fieldValidationErrors.gender = validGender
           ? ""
           : "Nem megadása kötelező!";
         break;
@@ -76,141 +88,127 @@ class AddStudentForm extends Component {
         break;
     }
 
-    this.setState(
-      {
-        formErrors: fieldValidationErrors,
-        nameValid: nameValid,
-        emailValid: emailValid,
-        ageValid: ageValid,
-        genderValid: genderValid,
-      },
-      this.validateForm
-    );
+    setFormErrors(fieldValidationErrors);
+    setNameValid(validName);
+    setEmailValid(validEmail);
+    setAgeValid(validAge);
+    setGenderValid(validGender);
+    
+    if(validName && validEmail && validAge && validGender) {
+      setFormValid(true);
+    }
   }
 
-  validateForm() {
-    this.setState({
-      formValid:
-        this.state.nameValid &&
-        this.state.emailValid &&
-        this.state.ageValid &&
-        this.state.genderValid,
-    });
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.setState({ showAlert: true });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setShowAlert(true);
     setTimeout(() => {
-      this.setState({
-        showAlert: false,
-        name: "",
-        email: "",
-        age: "",
-        gender: "",
-        formValid: false,
-      });
+      setShowAlert(false);
+      setName("");
+      setEmail("");
+      setAge("");
+      setGender("");
+      setFormValid(false);
     }, 2000);
     addNewStudent(
       new Student(
-        this.state.name,
-        this.state.age,
-        this.state.email,
-        this.state.gender
+        name,
+        age,
+        email,
+        gender
       )
     );
   };
 
-  render() {
-    return (
-      <div className="container">
-        <Header
-          buttonTitle="Vissza"
-          buttonLink="/studentList"
-          title="Új tanuló hozzáadása"
-        />
-        <Alert show={this.state.showAlert} variant="success">
-          {this.state.name} tanuló sikeresen létrehozva
-        </Alert>
-        <Form onSubmit={this.handleSubmit} noValidate>
-          <FormErrors formErrors={this.state.formErrors} />
-          <Form.Group
-            className={`${classes["form-control"]} ${
-              this.state.formErrors.name && classes.invalid
-            }`}
+  return (
+    <div className="container">
+      <Header
+        buttonTitle="Vissza"
+        buttonLink="/studentList"
+        title="Új tanuló hozzáadása"
+      />
+      <Alert show={showAlert} variant="success">
+        {name} tanuló sikeresen létrehozva
+      </Alert>
+      <Form onSubmit={handleSubmit} noValidate>
+        <FormErrors formErrors={formErrors} />
+        <Form.Group
+          className={`${classes["form-control"]} ${
+            formErrors.name && classes.invalid
+          }`}
+        >
+          <Form.Label htmlFor="name">Név</Form.Label>
+          <Form.Control
+            type="text"
+            name="name"
+            placeholder="Név"
+            value={name}
+            required
+            onChange={handleNameChange}
+          />
+        </Form.Group>
+        <Form.Group
+          className={`${classes["form-control"]} ${
+            formErrors.email && classes.invalid
+          }`}
+        >
+          <Form.Label htmlFor="email">Email</Form.Label>
+          <Form.Control
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={email}
+            required
+            onChange={handleEmailChange}
+          />
+        </Form.Group>
+        <Form.Group
+          className={`${classes["form-control"]} ${
+            formErrors.age && classes.invalid
+          }`}
+        >
+          <Form.Label htmlFor="age">Életkor</Form.Label>
+          <Form.Control
+            type="number"
+            name="age"
+            placeholder="Életkor"
+            value={age}
+            required
+            onChange={handleAgeChange}
+          />
+        </Form.Group>
+        <Form.Group
+          className={`${classes["form-control"]} ${
+            formErrors.gender && classes.invalid
+          }`}
+        >
+          <Form.Label htmlFor="gender">Nem</Form.Label>
+          <Form.Control
+            as="select"
+            name="gender"
+            value={gender}
+            required
+            onChange={handleGenderChange}
           >
-            <Form.Label htmlFor="name">Név</Form.Label>
-            <Form.Control
-              type="text"
-              name="name"
-              placeholder="Név"
-              value={this.state.name}
-              required
-              onChange={this.handleChange}
-            />
-          </Form.Group>
-          <Form.Group
-            className={`${classes["form-control"]} ${
-              this.state.formErrors.email && classes.invalid
-            }`}
-          >
-            <Form.Label htmlFor="email">Email</Form.Label>
-            <Form.Control
-              type="email"
-              name="email"
-              placeholder="Email"
-              required
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-          </Form.Group>
-          <Form.Group
-            className={`${classes["form-control"]} ${
-              this.state.formErrors.age && classes.invalid
-            }`}
-          >
-            <Form.Label htmlFor="age">Életkor</Form.Label>
-            <Form.Control
-              type="number"
-              name="age"
-              placeholder="Életkor"
-              required
-              value={this.state.age}
-              onChange={this.handleChange}
-            />
-          </Form.Group>
-          <Form.Group
-            className={`${classes["form-control"]} ${
-              this.state.formErrors.gender && classes.invalid
-            }`}
-          >
-            <Form.Label htmlFor="gender">Nem</Form.Label>
-            <Form.Control
-              as="select"
-              name="gender"
-              required
-              value={this.state.gender}
-              onChange={this.handleChange}
-            >
-              <option value="">Válassz...</option>
-              <option value="FEMALE">Nő</option>
-              <option value="MALE">Férfi</option>
-              <option value="Egyéb">Egyéb</option>
-              <option value="Nem szeretném megadni">
-                Nem szeretném megadni
-              </option>
-            </Form.Control>
-          </Form.Group>
-          <div>
-            <ButtonComponent
-              buttonText="Mentés"
-              disabled={!this.state.formValid}
-            /> 
-          </div>
-        </Form>
-      </div>
-    );
-  }
+            <option value="">Válassz...</option>
+            <option value="FEMALE">Nő</option>
+            <option value="MALE">Férfi</option>
+            <option value="Egyéb">Egyéb</option>
+            <option value="Nem szeretném megadni">
+              Nem szeretném megadni
+            </option>
+          </Form.Control>
+        </Form.Group>
+        <div>
+          <ButtonComponent
+            buttonText="Mentés"
+            disabled={!formValid}
+            type="submit"
+          /> 
+        </div>
+      </Form>
+    </div>
+  );
 }
 
 export default AddStudentForm;

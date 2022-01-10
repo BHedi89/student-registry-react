@@ -8,6 +8,7 @@ const ButtonComponent = props => {
       className={`${classes.button} mb-3`}
       onClick={props.onClick}
       disabled={props.disabled}
+      type={props.type}
     >
       {props.buttonText}
     </Button>
