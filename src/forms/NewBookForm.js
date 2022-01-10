@@ -1,26 +1,24 @@
-import { Component } from "react";
 import { Form, Col, Alert } from "react-bootstrap";
 import { FormErrors } from "../error/FormErrors";
 import classes from "./FormValidation.module.css";
 import { addNewBook, Book } from "../http/bookService";
 import { getSingleStudent } from "../http/studentService";
 import ButtonComponent from "../UI/ButtonComponent";
+import { useState } from "react";
 
-class NewBookForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showAlert: false,
-      isbn: "",
-      title: "",
-      subtitle: "",
-      author: "",
-      published: "",
-      publisher: "",
-      pages: "",
-      description: "",
-      website: "",
-      formErrors: {
+const NewBookForm = props => {
+  const [showAlert, setShowAlert] = useState(false);
+  const [isbn, setIsbn] = useState("");
+  const [title, setTitle] = useState("");
+  const [subtitle, setSubtitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [published, setPublished] = useState("");
+  const [publisher, setPublisher] = useState("");
+  const [pages, setPages] = useState("");
+  const [description, setDescription] = useState("");
+  const [website, setWebsite] = useState("");
+  const [formErrors, setFormErrors] = useState({
+     formErrors: {
         isbn: "",
         title: "",
         subtitle: "",
@@ -30,97 +28,146 @@ class NewBookForm extends Component {
         pages: "",
         description: "",
         website: "",
-      },
-      isbnValid: false,
-      titleValid: false,
-      subtitleValid: false,
-      authorValid: false,
-      publishedValid: false,
-      publisherValid: false,
-      pagesValid: false,
-      descriptionValid: false,
-      websiteValid: false,
-      formValid: false,
-    };
-  }
-
-  handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    this.setState(
-      {
-        [name]: value,
-      },
-      () => {
-        this.validateField(name, value);
       }
-    );
+  });
+  const [isbnValid, setIsbnValid] = useState(false);
+  const [titleValid, setTitleValid] = useState(false);
+  const [subtitleValid, setSubtitleValid] = useState(false);
+  const [authorValid, setAuthorValid] = useState(false);
+  const [publishedValid, setPublishedValid] = useState(false);
+  const [publisherValid, setPublisherValid] = useState(false);
+  const [pagesValid, setPagesValid] = useState(false);
+  const [descriptionValid, setDescriptionValid] = useState(false);
+  const [websiteValid, setWebsiteValid] = useState(false);
+  const [formValid, setFormValid] = useState(false);
+
+  const handleIsbnChange = (e) => {
+    const fieldName = e.target.name;
+    const value = e.target.value;
+    validateField(fieldName, value);
+    setIsbn(e.target.value);
   };
 
-  validateField(fieldName, value) {
-    let fieldValidationErrors = this.state.formErrors;
-    let isbnValid = this.state.isbnValid;
-    let titleValid = this.state.titleValid;
-    let subtitleValid = this.state.subtitleValid;
-    let authorValid = this.state.authorValid;
-    let publishedValid = this.state.publishedValid;
-    let publisherValid = this.state.publisherValid;
-    let pagesValid = this.state.pagesValid;
-    let descriptionValid = this.state.descriptionValid;
-    let websiteValid = this.state.websiteValid;
+  const handleTitleChange = (e) => {
+    const fieldName = e.target.name;
+    const value = e.target.value;
+    validateField(fieldName, value);
+    setTitle(e.target.value);
+  };
+
+  const handleSubtitleChange = (e) => {
+    const fieldName = e.target.name;
+    const value = e.target.value;
+    validateField(fieldName, value);
+    setSubtitle(e.target.value);
+  };
+
+  const handleAuthorChange = (e) => {
+    const fieldName = e.target.name;
+    const value = e.target.value;
+    validateField(fieldName, value);
+    setAuthor(e.target.value);
+  };
+
+  const handlePublishedChange = (e) => {
+    const fieldName = e.target.name;
+    const value = e.target.value;
+    validateField(fieldName, value);
+    setPublished(e.target.value);
+  };
+
+  const handlePublisherChange = (e) => {
+    const fieldName = e.target.name;
+    const value = e.target.value;
+    validateField(fieldName, value);
+    setPublisher(e.target.value);
+  };
+
+  const handlePagesChange = (e) => {
+    const fieldName = e.target.name;
+    const value = e.target.value;
+    validateField(fieldName, value);
+    setPages(e.target.value);
+  };
+
+  const handleDescriptionChange = (e) => {
+    const fieldName = e.target.name;
+    const value = e.target.value;
+    validateField(fieldName, value);
+    setDescription(e.target.value);
+  };
+
+  const handleWebsiteChange = (e) => {
+    const fieldName = e.target.name;
+    const value = e.target.value;
+    validateField(fieldName, value);
+    setWebsite(e.target.value);
+  };
+
+  const validateField = (fieldName, value) => {
+    let fieldValidationErrors = formErrors;
+    let validIsbn = isbnValid;
+    let validTitle = titleValid;
+    let validSubtitle = subtitleValid;
+    let validAuthor = authorValid;
+    let validPublished = publishedValid;
+    let validPublisher = publisherValid;
+    let validPages = pagesValid;
+    let validDescription = descriptionValid;
+    let validWebsite = websiteValid;
 
     switch (fieldName) {
       case "isbn":
-        isbnValid = value !== "";
-        fieldValidationErrors.isbn = isbnValid
+        validIsbn = value !== "";
+        fieldValidationErrors.isbn = validIsbn
           ? ""
           : "Isbn szám megadása kötelező!";
         break;
       case "title":
-        titleValid = value !== "";
-        fieldValidationErrors.title = titleValid
+        validTitle = value !== "";
+        fieldValidationErrors.title = validTitle
           ? ""
           : "Cím megadása kötelező!";
         break;
       case "subtitle":
-        subtitleValid = value !== "";
-        fieldValidationErrors.subtitle = subtitleValid
+        validSubtitle = value !== "";
+        fieldValidationErrors.subtitle = validSubtitle
           ? ""
           : "Alcím megadása kötelező!";
         break;
       case "author":
-        authorValid = value !== "";
-        fieldValidationErrors.author = authorValid
+        validAuthor = value !== "";
+        fieldValidationErrors.author = validAuthor
           ? ""
           : "Szerző megadása kötelező!";
         break;
       case "published":
-        publishedValid = value !== "";
-        fieldValidationErrors.published = publishedValid
+        validPublished = value !== "";
+        fieldValidationErrors.published = validPublished
           ? ""
           : "Kiadás dátumának megadása kötelező!";
         break;
       case "publisher":
-        publisherValid = value !== "";
-        fieldValidationErrors.publisher = publisherValid
+        validPublisher = value !== "";
+        fieldValidationErrors.publisher = validPublisher
           ? ""
           : "Kiadó megadása kötelező!";
         break;
       case "pages":
-        pagesValid = value !== "";
-        fieldValidationErrors.pages = pagesValid
+        validPages = value !== "";
+        fieldValidationErrors.pages = validPages
           ? ""
           : "Lapok számának megadása kötelező!";
         break;
       case "description":
-        descriptionValid = value !== "";
-        fieldValidationErrors.description = descriptionValid
+        validDescription = value !== "";
+        fieldValidationErrors.description = validDescription
           ? ""
           : "Leírás megadása kötelező!";
         break;
       case "website":
-        websiteValid = value !== "";
-        fieldValidationErrors.website = websiteValid
+        validWebsite = value !== "";
+        fieldValidationErrors.website = validWebsite
           ? ""
           : "Weboldal megadása kötelező!";
         break;
@@ -128,244 +175,229 @@ class NewBookForm extends Component {
         break;
     }
 
-    this.setState(
-      {
-        formErrors: fieldValidationErrors,
-        isbnValid: isbnValid,
-        titleValid: titleValid,
-        subtitleValid: subtitleValid,
-        authorValid: authorValid,
-        publishedValid: publishedValid,
-        publisherValid: publisherValid,
-        pagesValid: pagesValid,
-        descriptionValid: descriptionValid,
-        websiteValid: websiteValid,
-      },
-      this.validateForm
-    );
+    setFormErrors(fieldValidationErrors);
+    setIsbnValid(validIsbn);
+    setTitleValid(validTitle);
+    setSubtitleValid(validSubtitle);
+    setAuthorValid(validAuthor);
+    setPublishedValid(validPublished);
+    setPublisherValid(validPublisher);
+    setPagesValid(validPages);
+    setDescriptionValid(validDescription);
+    setWebsiteValid(validWebsite);
+
+    if(validIsbn && validTitle && validSubtitle && validAuthor 
+      && validPublished && validPublisher && validPages
+      && validDescription && validWebsite) {
+        setFormValid(true);
+      }
   }
 
-  validateForm() {
-    this.setState({
-      formValid:
-        this.state.isbnValid &&
-        this.state.titleValid &&
-        this.state.subtitleValid &&
-        this.state.authorValid &&
-        this.state.publishedValid &&
-        this.state.publisherValid &&
-        this.state.pagesValid &&
-        this.state.descriptionValid &&
-        this.state.websiteValid,
-    });
-  }
-
-  handleSubmit = (event) => {
+  const handleSubmit = (event) => {
+    console.log("submit working");
     event.preventDefault();
-    this.setState({ showAlert: true });
+    setShowAlert(true);
     setTimeout(() => {
-      this.setState({
-        showAlert: false,
-        isbn: "",
-        title: "",
-        subtitle: "",
-        author: "",
-        published: "",
-        publisher: "",
-        pages: "",
-        description: "",
-        website: "",
-        formValid: false,
-      });
+        setShowAlert(false);
+        setIsbn("");
+        setTitle("");
+        setSubtitle("");
+        setAuthor("");
+        setPublished("");
+        setPublisher("");
+        setPages("");
+        setDescription("");
+        setWebsite("");
+        setFormValid(false);
     }, 2000);
     addNewBook(
-      this.props.studentId,
+      props.studentId,
       new Book(
-        this.state.isbn,
-        this.state.title,
-        this.state.subtitle,
-        this.state.author,
-        this.state.published,
-        this.state.publisher,
-        this.state.pages,
-        this.state.description,
-        this.state.website
+        isbn,
+        title,
+        subtitle,
+        author,
+        published,
+        publisher,
+        pages,
+        description,
+        website
       )
     ).then(() => {
-      getSingleStudent(this.props.studentId).then((book) =>
-        this.props.onUpdateStudentsBook(book)
+      getSingleStudent(props.studentId).then((book) =>
+        props.onUpdateStudentsBook(book)
       );
     });
   };
 
-  render() {
-    return (
-      <>
-        <Alert show={this.state.showAlert} variant="success">
-          {this.state.title} című könyv sikeresen létrehozva
-        </Alert>
-        <Form onSubmit={this.handleSubmit} noValidate>
-          <FormErrors formErrors={this.state.formErrors} />
-          <Form.Row>
-            <Form.Group
-              as={Col}
-              className={`${classes["form-control"]} ${
-                this.state.formErrors.name && classes.invalid
-              }`}
-            >
-              <Form.Label>Isbn szám</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="Isbn szám"
-                name="isbn"
-                value={this.state.isbn}
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group
-              as={Col}
-              className={`${classes["form-control"]} ${
-                this.state.formErrors.name && classes.invalid
-              }`}
-            >
-              <Form.Label>Szerző</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="Szerző"
-                name="author"
-                value={this.state.author}
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-          </Form.Row>
-          <Form.Row>
-            <Form.Group
-              as={Col}
-              className={`${classes["form-control"]} ${
-                this.state.formErrors.name && classes.invalid
-              }`}
-            >
-              <Form.Label>Cím</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="Cím"
-                name="title"
-                value={this.state.title}
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group
-              as={Col}
-              className={`${classes["form-control"]} ${
-                this.state.formErrors.name && classes.invalid
-              }`}
-            >
-              <Form.Label>Alcím</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="Alcím"
-                name="subtitle"
-                value={this.state.subtitle}
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-          </Form.Row>
-          <Form.Row>
-            <Form.Group
-              as={Col}
-              className={`${classes["form-control"]} ${
-                this.state.formErrors.name && classes.invalid
-              }`}
-            >
-              <Form.Label>Kiadás dátuma</Form.Label>
-              <Form.Control
-                required
-                type="date"
-                placeholder="Kiadás dátuma"
-                name="published"
-                value={this.state.published}
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group
-              as={Col}
-              className={`${classes["form-control"]} ${
-                this.state.formErrors.name && classes.invalid
-              }`}
-            >
-              <Form.Label>Kiadó</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="Kiadó"
-                name="publisher"
-                value={this.state.publisher}
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group
-              as={Col}
-              className={`${classes["form-control"]} ${
-                this.state.formErrors.name && classes.invalid
-              }`}
-            >
-              <Form.Label>Oldalak száma</Form.Label>
-              <Form.Control
-                required
-                type="number"
-                placeholder="Oldalak száma"
-                name="pages"
-                value={this.state.pages}
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-          </Form.Row>
-          <Form.Row>
-            <Form.Group
-              as={Col}
-              className={`${classes["form-control"]} ${
-                this.state.formErrors.name && classes.invalid
-              }`}
-            >
-              <Form.Label>Leírás</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="Leírás"
-                name="description"
-                value={this.state.description}
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group
-              as={Col}
-              className={`${classes["form-control"]} ${
-                this.state.formErrors.name && classes.invalid
-              }`}
-            >
-              <Form.Label>Weboldal</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="Weboldal"
-                name="website"
-                value={this.state.website}
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-          </Form.Row>
-          <ButtonComponent
-            buttonText="Mentés"
-            disabled={!this.state.formValid}
-          />
-        </Form>
-      </>
-    );
-  }
+  
+  return (
+    <>
+      <Alert show={showAlert} variant="success">
+        {title} című könyv sikeresen létrehozva
+      </Alert>
+      <Form onSubmit={handleSubmit} noValidate>
+        <FormErrors formErrors={formErrors} />
+        <Form.Row>
+          <Form.Group
+            as={Col}
+            className={`${classes["form-control"]} ${
+              formErrors.name && classes.invalid
+            }`}
+          >
+            <Form.Label>Isbn szám</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              placeholder="Isbn szám"
+              name="isbn"
+              value={isbn}
+              onChange={handleIsbnChange}
+            />
+          </Form.Group>
+          <Form.Group
+            as={Col}
+            className={`${classes["form-control"]} ${
+              formErrors.name && classes.invalid
+            }`}
+          >
+            <Form.Label>Szerző</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              placeholder="Szerző"
+              name="author"
+              value={author}
+              onChange={handleAuthorChange}
+            />
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group
+            as={Col}
+            className={`${classes["form-control"]} ${
+              formErrors.name && classes.invalid
+            }`}
+          >
+            <Form.Label>Cím</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              placeholder="Cím"
+              name="title"
+              value={title}
+              onChange={handleTitleChange}
+            />
+          </Form.Group>
+          <Form.Group
+            as={Col}
+            className={`${classes["form-control"]} ${
+              formErrors.name && classes.invalid
+            }`}
+          >
+            <Form.Label>Alcím</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              placeholder="Alcím"
+              name="subtitle"
+              value={subtitle}
+              onChange={handleSubtitleChange}
+            />
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group
+            as={Col}
+            className={`${classes["form-control"]} ${
+              formErrors.name && classes.invalid
+            }`}
+          >
+            <Form.Label>Kiadás dátuma</Form.Label>
+            <Form.Control
+              required
+              type="date"
+              placeholder="Kiadás dátuma"
+              name="published"
+              value={published}
+              onChange={handlePublishedChange}
+            />
+          </Form.Group>
+          <Form.Group
+            as={Col}
+            className={`${classes["form-control"]} ${
+              formErrors.name && classes.invalid
+            }`}
+          >
+            <Form.Label>Kiadó</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              placeholder="Kiadó"
+              name="publisher"
+              value={publisher}
+              onChange={handlePublisherChange}
+            />
+          </Form.Group>
+          <Form.Group
+            as={Col}
+            className={`${classes["form-control"]} ${
+              formErrors.name && classes.invalid
+            }`}
+          >
+            <Form.Label>Oldalak száma</Form.Label>
+            <Form.Control
+              required
+              type="number"
+              placeholder="Oldalak száma"
+              name="pages"
+              value={pages}
+              onChange={handlePagesChange}
+            />
+          </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group
+            as={Col}
+            className={`${classes["form-control"]} ${
+              formErrors.name && classes.invalid
+            }`}
+          >
+            <Form.Label>Leírás</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              placeholder="Leírás"
+              name="description"
+              value={description}
+              onChange={handleDescriptionChange}
+            />
+          </Form.Group>
+          <Form.Group
+            as={Col}
+            className={`${classes["form-control"]} ${
+              formErrors.name && classes.invalid
+            }`}
+          >
+            <Form.Label>Weboldal</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              placeholder="Weboldal"
+              name="website"
+              value={website}
+              onChange={handleWebsiteChange}
+            />
+          </Form.Group>
+        </Form.Row>
+        <ButtonComponent
+          buttonText="Mentés"
+          disabled={!formValid}
+          type="submit"
+        />
+      </Form>
+    </>
+  );
 }
 
 export default NewBookForm;
