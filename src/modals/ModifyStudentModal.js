@@ -10,7 +10,6 @@ const ModifyStudentModal = props => {
   const [email, setEmail] = useState(props.students.email);
   const [age, setAge] = useState(props.students.age);
   const [gender, setGender] = useState(props.students.gender);
-  const [changeStudentDataObject, setChangeStudentDataObject] = useState(); //?????
 
   const handleSubmit = (e) => {
     const form = e.currentTarget;
@@ -19,10 +18,10 @@ const ModifyStudentModal = props => {
       modifyStudent(
         props.students.id,
         new Student(
-          setName(name),
-          setEmail(email),
-          setAge(age),
-          setGender(gender)
+          name,
+          age,
+          email,
+          gender
         )
       ).then((updatedStudent) =>
         props.onStudentUpdate(props.students.id, updatedStudent)
@@ -31,8 +30,20 @@ const ModifyStudentModal = props => {
     }
   };
 
-  const inputChangeHandler = (changeStudentDataObject) => {//?????
-    setChangeStudentDataObject(changeStudentDataObject);
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  }
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  }
+
+  const handleAgeChange = (e) => {
+    setAge(e.target.value);
+  }
+
+  const handleGenderChange = (e) => {
+    setGender(e.target.value);
   }
   
   return (
@@ -42,11 +53,10 @@ const ModifyStudentModal = props => {
           <Form.Label>Név</Form.Label>
           <Form.Control
             type="text"
+            name="name"
             placeholder="Név"
             required
-            onChange={(e) => {
-              inputChangeHandler({ name: e.target.value });
-            }}
+            onChange={handleNameChange}
             defaultValue={props.students.name}
           />
           <Form.Control.Feedback type="invalid">
@@ -57,11 +67,10 @@ const ModifyStudentModal = props => {
           <Form.Label>E-mail cím</Form.Label>
           <Form.Control
             type="email"
+            name="email"
             placeholder="E-mail cím"
             required
-            onChange={(e) => {
-              inputChangeHandler({ email: e.target.value });
-            }}
+            onChange={handleEmailChange}
             defaultValue={props.students.email}
           />
           <Form.Control.Feedback type="invalid">
@@ -72,11 +81,10 @@ const ModifyStudentModal = props => {
           <Form.Label>Életkor</Form.Label>
           <Form.Control
             type="number"
+            name="age"
             placeholder="Életkor"
             required
-            onChange={(e) => {
-              inputChangeHandler({ age: e.target.value });
-            }}
+            onChange={handleAgeChange}
             defaultValue={props.students.age}
           />
           <Form.Control.Feedback type="invalid">
@@ -88,10 +96,9 @@ const ModifyStudentModal = props => {
           <Form.Control
             required
             as="select"
+            name="gender"
             className="custom-select my-1 mr-sm-2"
-            onChange={(e) => {
-              inputChangeHandler({ gender: e.target.value });
-            }}
+            onChange={handleGenderChange}
             defaultValue={props.students.gender}
           >
             <option value="">Válassz...</option>
