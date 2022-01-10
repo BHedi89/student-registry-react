@@ -56,8 +56,6 @@ const StudentBooks = props => {
   return (
     <>
       <Header
-        buttonLink="/studentList"
-        buttonTitle="Vissza"
         title={`${student.name} könyvei`}
       />
       <ButtonComponent

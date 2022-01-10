@@ -6,7 +6,10 @@ const MainLayout = props => {
     <>
       <div className={classes.flexcontainer}>
         <div className={classes.sideBar}>
-          <SideBar />
+          <SideBar 
+            allStudent="/studentList"
+            newStudent="/addStudent"
+          />
         </div>
         <div className={classes.maincontent}>
             {props.children}

@@ -52,8 +52,6 @@ const StudentList = () => {
     <>
       <Header
         title="Hallgatói nyilvántartás"
-        buttonTitle="Hozzáadás"
-        buttonLink="/addStudent"
       />
       <Filter handleChange={handleChange} />
       <TableComponent>

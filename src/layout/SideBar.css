@@ -12,6 +12,10 @@
     min-width: 100%;
 }
 
+.pro-sidebar .pro-menu a {
+    color: #E5E3D6;
+}
+
 #header .pro-sidebar.collapsed {
     width: 80px;
     min-width: 80px;
@@ -53,7 +57,7 @@
     color: #000;
 }
 
-#header .pro-sidebar-inner .pro-sidebar-layout .active {
+.menu:hover {
     background-image: linear-gradient(0deg, #452F22 0%, #D2B2A7 100%);
 }
 

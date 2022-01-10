@@ -16,8 +16,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
-const SideBar = () => {
+const SideBar = props => {
   const [isMenuCollapse, setMenuCollapse] = useState(false);
 
   const menuIconClick = () => {
@@ -39,19 +40,21 @@ const SideBar = () => {
           </SidebarHeader>
           <SidebarContent>
             <Menu iconShape="square">
-              <MenuItem active={true} icon={<FiHome />}>
-                Hallgatók
+              <MenuItem icon={<FiHome />} className="menu">
+                <NavLink to={props.allStudent}>Hallgatók</NavLink>
               </MenuItem>
-              <MenuItem icon={<FaList />}>Új hallgató</MenuItem>
-              <MenuItem icon={<FaRegHeart />}>Favourite</MenuItem>
-              <MenuItem icon={<RiPencilLine />}>Author</MenuItem>
-              <MenuItem icon={<BiCog />}>Settings</MenuItem>
+              <MenuItem icon={<FaList />} className="menu">
+                <NavLink to={props.newStudent}>Új hallgató</NavLink>
+              </MenuItem>
+              <MenuItem icon={<FaRegHeart />} className="menu">Favourite</MenuItem>
+              <MenuItem icon={<RiPencilLine />} className="menu">Author</MenuItem>
+              <MenuItem icon={<BiCog />} className="menu">Settings</MenuItem>
             </Menu>
           </SidebarContent>
           <SidebarFooter>
             <Menu iconShape="square">
-              <MenuItem icon={<FiLogIn />}>Bejelentkezés</MenuItem>
-              <MenuItem icon={<FiLogOut />}>Kijelentkezés</MenuItem>
+              <MenuItem icon={<FiLogIn />} className="menu">Bejelentkezés</MenuItem>
+              <MenuItem icon={<FiLogOut />} className="menu">Kijelentkezés</MenuItem>
             </Menu>
           </SidebarFooter>
         </ProSidebar>
