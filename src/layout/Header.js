@@ -1,6 +1,3 @@
-import { Link } from "react-router-dom";
-import ButtonComponent from "../UI/ButtonComponent";
-
 const Header = props => {
     return (
         <div className="row mt-5 mb-2 ml-1">

@@ -1,9 +1,59 @@
-.flexcontainer {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
     display: flex;
 }
 
-.maincontent {
-    margin-left: 310px;
-    margin-right: 100px;
-    flex-grow: 1;
+.flexcontainer {
+    flex: 50%;
 }
+
+.maincontent {
+    flex: 50%;
+    height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin: 0 30px 0 30px;
+} 
+
+.maincontent::-webkit-scrollbar {
+    display: none;
+}
+
+.sidebar {
+    height: 100vh;
+}
+
+@media only screen and (max-width: 600px) {
+    .sidebar {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .sidebar {
+        display: none;
+    }
+}
+ 
+@media only screen and (min-width: 768px) { 
+    .sidebar {
+        display: none;
+    }
+}
+ 
+@media only screen and (min-width: 992px) {
+    .sidebar {
+        display: block;
+    }
+}
+ 
+@media only screen and (min-width: 1200px) {
+    .sidebar {
+        display: block;
+    }
+} 

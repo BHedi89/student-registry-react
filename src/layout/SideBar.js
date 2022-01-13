@@ -48,7 +48,7 @@ const SideBar = props => {
               </MenuItem>
               <MenuItem icon={<FaRegHeart />} className="menu">Favourite</MenuItem>
               <MenuItem icon={<RiPencilLine />} className="menu">Author</MenuItem>
-              <MenuItem icon={<BiCog />} className="menu">Settings</MenuItem>
+              <MenuItem icon={<BiCog />} className="menu">Beállítások</MenuItem>
             </Menu>
           </SidebarContent>
           <SidebarFooter>

@@ -4,15 +4,20 @@ import classes from "./MainLayout.module.css";
 const MainLayout = props => {
   return (
     <>
-      <div className={classes.flexcontainer}>
-        <div className={classes.sideBar}>
-          <SideBar 
-            allStudent="/studentList"
-            newStudent="/addStudent"
-          />
+      <div className={classes.container}>
+        <div className={classes.sidebarcontainer}>
+          <div className={classes.sidebar}>
+            <SideBar 
+              allStudent="/studentList"
+              newStudent="/addStudent"
+            />
+          </div>
         </div>
-        <div className={classes.maincontent}>
-            {props.children}
+        
+        <div className={classes.flexcontainer}>
+          <div className={classes.maincontent}>
+              {props.children}
+          </div>
         </div>
       </div>
     </>
