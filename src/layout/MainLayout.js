@@ -5,13 +5,11 @@ const MainLayout = props => {
   return (
     <>
       <div className={classes.container}>
-        <div className={classes.sidebarcontainer}>
-          <div className={classes.sidebar}>
-            <SideBar 
-              allStudent="/studentList"
-              newStudent="/addStudent"
-            />
-          </div>
+        <div className={classes.sidebar}>
+          <SideBar 
+            allStudent="/studentList"
+            newStudent="/addStudent"
+          />
         </div>
         
         <div className={classes.flexcontainer}>
